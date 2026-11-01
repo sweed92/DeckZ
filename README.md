@@ -96,6 +96,10 @@ Les fixtures sont des copies de pages de sites tiers : elles ne sont pas version
 ./gradlew testDebugUnitTest
 ```
 
+## Licence
+
+Le code est sous licence [MIT](LICENSE). Cette licence ne couvre ni les polices (licence propre, ci-dessous) ni les marques, cartes et images du jeu.
+
 ## Crédits
 
 - Dragon Ball et Dragon Ball Super Card Game Fusion World sont des marques de leurs ayants droit (Bandai, etc.).
