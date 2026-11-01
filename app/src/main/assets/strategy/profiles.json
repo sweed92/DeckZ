@@ -1,0 +1,1013 @@
+{
+  "version": "2026-10-26",
+  "meta": "FB11 (Brightness of Hope)",
+  "sources": [
+    "Méta DeckPlanet (communauté, 45 jours) : cartes clés et taux d'inclusion",
+    "Deck profiles db-fusionworld.com (méta FB10)",
+    "Tier list dragonball.gg (octobre 2026)",
+    "Analyse des textes de cartes officiels"
+  ],
+  "leaders": {
+    "FB11-001": {
+      "nom": "Son Goku (rouge, Evolve)",
+      "archetype": "AGGRO",
+      "vitesse": 4,
+      "pic": 4,
+      "resume": "Le deck le plus joué de la méta FB11. Il empile des Son Goku avec [Evolve] et frappe très fort dès le tour 3-4. Le leader éveillé peut rediriger une attaque adverse vers une carte Evolve : ses grosses cartes servent aussi de bouclier.",
+      "eveil": "Vie à 4 ou moins, OU 2 énergies + une carte Evolve en jeu : il s'éveille très tôt, souvent dès le tour 2-3.",
+      "plan": {
+        "early": [
+          "Tour 1 : joue un Son Goku coût 1 qui cherche (FB11-009) ou qui fait piocher/défausser (FB11-008) pour construire ta main.",
+          "Tour 2 : pose une base pour Evolve et vise l'éveil dès que tu as 2 énergies et une carte Evolve.",
+          "Garde ta vie haute : ton éveil ne dépend pas des dégâts subis."
+        ],
+        "mid": [
+          "Tour 3-4 : Evolve en Son Goku 30000 (FB11-011) puis en Son Goku 35000 (FB11-121), qui retire 20000 de puissance à une carte adverse.",
+          "Grand Saiyaman (FB11-002) réduit le coût de ton prochain Evolve : c'est ton accélérateur.",
+          "Trunks: Youth (FB11-017) donne Double Strike à ta grosse carte Evolve : c'est la menace qui retire 2 vies d'un coup."
+        ],
+        "end": [
+          "Enchaîne les attaques à 30000-35000 pour vider la main adverse de combos, puis finis avec Double Strike.",
+          "Tant que tu as une carte Evolve en jeu, ton leader éveillé protège tes points de vie en détournant une attaque."
+        ]
+      },
+      "mulligan": "Garde au moins un Son Goku coût 1 qui cherche et une carte Evolve de coût 4 ou 5. Sans moteur de recherche, mulligan.",
+      "forces": ["evolve", "burst", "draw", "power-reduction"],
+      "faiblesses": ["Dépend de ses cartes Evolve : si on les retire du terrain, il perd sa pression et sa protection.", "Peu de vrai retrait (KO) : il réduit la puissance mais ne détruit pas."],
+      "menaces": [
+        {"carte": "FB11-121", "pourquoi": "Evolve 35000 qui retire 20000 de puissance à une de tes cartes en arrivant."},
+        {"carte": "FB11-017", "pourquoi": "Se sacrifie pour donner Double Strike et +5000 à son gros Son Goku : 2 dégâts d'un coup."},
+        {"carte": "FP-097", "pourquoi": "Pendant TON tour, il gagne +20000 et coûte 3 de plus : très dur à battre ou à cibler."}
+      ],
+      "conseilsContre": [
+        "Retire ou neutralise ses cartes Evolve avant qu'elles n'évoluent : sans elles, son leader éveillé ne protège plus rien.",
+        "Garde au moins 2 vies de marge à partir du tour 4 à cause de Double Strike (Trunks: Youth).",
+        "Attaque ses cartes reposées quand c'est rentable : il investit beaucoup d'énergie dans chacune."
+      ]
+    },
+    "FB11-025": {
+      "nom": "Trunks: Future / Son Gohan: Future (bleu, Ki)",
+      "archetype": "TEMPO",
+      "vitesse": 3,
+      "pic": 4,
+      "resume": "Deck de tempo bleu qui accumule du Ki sur ses cartes « Future », renvoie tes petites cartes dans ta main et recycle ses propres Trunks pour piocher. Il gagne à l'usure et sur la qualité de ses tours.",
+      "eveil": "2 Ki au total dans sa zone de combat : s'éveille vite (tour 2-3) sans prendre de dégâts.",
+      "plan": {
+        "early": [
+          "Tour 1 : Mai: Future (FB11-046) ou Bulma: Future pour chercher et filtrer.",
+          "Tour 2 : Trunks: Future coût 2 (FB11-035) qui se met 1 Ki : avec un deuxième Ki, tu t'éveilles.",
+          "Utilise Time Machine (FB01-065) pour remettre un Trunks coût 2 en jeu à moindre coût."
+        ],
+        "mid": [
+          "Son Gohan: Future coût 3 (FB11-033 / FB11-032) pose un deuxième corps et distribue du Ki.",
+          "Trunks: Future coût 4 (FB11-036) renvoie jusqu'à 2 cartes adverses de coût 3 ou moins dans la main : énorme perte de tempo pour l'adversaire.",
+          "L'effet du leader éveillé recharge un Trunks en Ki puis le renvoie en main pour le rejouer : chaque rejeu redonne de la valeur."
+        ],
+        "end": [
+          "Trunks: Future coût 5 (FB11-037) donne du Ki à tout ton terrain et dépense du Ki pour des attaques très puissantes.",
+          "Use l'adversaire : il recommence ses petites cartes pendant que tu attaques avec des cartes à 30000+."
+        ]
+      },
+      "mulligan": "Garde Mai: Future ou une carte de recherche, plus un Trunks: Future coût 2.",
+      "forces": ["ki", "bounce", "draw", "tempo"],
+      "faiblesses": ["Ses cartes portent le Ki : si on les KO, il perd ses ressources et son moteur.", "Le renvoi en main ne touche que les coûts 3 ou moins : les grosses cartes y échappent."],
+      "menaces": [
+        {"carte": "FB11-036", "pourquoi": "En attaquant, renvoie jusqu'à 2 de tes cartes de coût 3 ou moins dans ta main."},
+        {"carte": "FB11-037", "pourquoi": "Donne du Ki à tout son terrain et dépense ce Ki pour gagner beaucoup de puissance."},
+        {"carte": "FB07-039", "pourquoi": "Réduit le coût de tes cartes de 2 pendant son tour : prépare ses renvois en main."}
+      ],
+      "conseilsContre": [
+        "Ne mise pas tout sur des cartes de coût 3 ou moins à partir du tour 4 : elles risquent d'être renvoyées en main.",
+        "KO en priorité les cartes qui portent le plus de Ki : c'est son carburant.",
+        "Il pioche beaucoup : mets de la pression tôt plutôt que de jouer la longue partie."
+      ]
+    },
+    "FB11-097": {
+      "nom": "Bardock (noir, Ki / Équipage)",
+      "archetype": "MIDRANGE",
+      "vitesse": 3,
+      "pic": 4,
+      "resume": "Midrange noir qui charge du Ki sur son leader et rentabilise la mort de ses cartes (effets « When KO'd »). Son Bardock 25000 coût 3 en mode repos empêche d'attaquer son leader : une défense très gênante.",
+      "eveil": "2 Ki sur le leader : il s'éveille vers le tour 2-3, souvent grâce à Bardock (FB11-123) qui donne 2 Ki d'un coup.",
+      "plan": {
+        "early": [
+          "Tour 1 : Bardock coût 1 (FB11-110) pour chercher une carte de l'Équipage.",
+          "Tour 2 : Bardock's Crew (FB11-114) ou Krillin (FS12-03) : chaque attaque donne 1 Ki à ton leader.",
+          "Vise 2 Ki pour t'éveiller, puis 3 Ki pour débloquer Legendary Warrior à coût réduit."
+        ],
+        "mid": [
+          "Tour 3 : Bardock 25000 (FB11-123) donne 2 Ki ; attaque avec, puis tant qu'il est en repos, l'adversaire ne peut plus attaquer ton leader.",
+          "Legendary Warrior (FS12-17) coûte 1 avec 3 Ki : KO d'une carte de coût 6 ou moins.",
+          "Le leader éveillé dépense 1 Ki pour relancer l'effet « When KO'd » d'une carte coût 2 de ta défausse."
+        ],
+        "end": [
+          "Les Great Ape (Borgos FB11-109, Fasha FB11-100) coûtent moins cher depuis la défausse et punissent quand ils meurent (KO, interdiction d'attaquer).",
+          "Bardock 35000 (FB08-112) arrive à prix réduit et fait piocher 2 cartes : termine en attaquant de tous les côtés."
+        ]
+      },
+      "mulligan": "Garde Bardock coût 1 (recherche) et une source de Ki (Bardock's Crew, Krillin ou Bardock FB11-123).",
+      "forces": ["ki", "removal", "attack-lock", "resilience"],
+      "faiblesses": ["Si son leader n'a pas de Ki, ses meilleurs effets coûtent cher ou s'éteignent.", "Son verrou d'attaque dépend d'un seul Bardock en repos : retire-le et le leader redevient attaquable."],
+      "menaces": [
+        {"carte": "FB11-123", "pourquoi": "En mode repos, tu ne peux plus attaquer son leader : élimine-le en priorité."},
+        {"carte": "FS12-17", "pourquoi": "Legendary Warrior : KO d'une carte coût 6 ou moins pour seulement 1 énergie avec 3 Ki."},
+        {"carte": "FP-101", "pourquoi": "En attaquant avec 3 Ki ou plus, KO une carte de coût 5 ou moins."}
+      ],
+      "conseilsContre": [
+        "Garde de quoi retirer ou attaquer le Bardock 25000 (FB11-123) quand il est en repos : sinon ton leader ne pourra plus attaquer le sien.",
+        "Évite d'avoir une seule grosse carte : son Legendary Warrior la KO pour presque rien.",
+        "Réfléchis avant de KO ses cartes : beaucoup ont un effet « When KO'd » qui lui profite."
+      ]
+    },
+    "FB11-049": {
+      "nom": "Goku Black (vert, Ki)",
+      "archetype": "MIDRANGE",
+      "vitesse": 3,
+      "pic": 4,
+      "resume": "Midrange vert qui fait boule de neige : chaque attaque du leader éveillé pioche et charge du Ki sur Goku Black et Zamasu. Il dépense ce Ki pour rejouer des Goku Black depuis son énergie et KO tes cartes.",
+      "eveil": "Un Goku Black ou un Zamasu en jeu, plus 2 Ki au total : souvent au tour 2-3.",
+      "plan": {
+        "early": [
+          "Tour 1 : Zamasu (FB11-062) ou Goku Black coût 1 (FB11-052) pour chercher ou piocher.",
+          "Tour 2 : Goku Black coût 2 (FB11-054) qui cherche, ou Goku Black coût 3 (FB11-053) qui arrive avec 2 Ki : éveil quasi immédiat.",
+          "Zamasu coût 1 (FB11-063) rend un Goku Black et lui-même impossibles à KO jusqu'à la fin du tour suivant de l'adversaire."
+        ],
+        "mid": [
+          "Chaque attaque du leader éveillé : pioche 2, défausse 1, et +1 Ki sur Goku Black et Zamasu.",
+          "Goku Black coût 4 (FB11-057) dépense 2 Ki pour rejouer un Goku Black coût 3 depuis ton énergie : avantage de cartes.",
+          "The Zero Mortal Project (FB11-072) : 1 Ki pour KO une carte de coût 5 ou moins."
+        ],
+        "end": [
+          "Les Goku Black coût 3 font des allers-retours entre l'énergie et le terrain : tu as toujours des attaquants frais.",
+          "Termine quand l'adversaire n'a plus de combos en main grâce à ta pioche supérieure."
+        ]
+      },
+      "mulligan": "Garde une carte de recherche (Zamasu FB11-062, Goku Black FB11-054) et Goku Black coût 3 (FB11-053).",
+      "forces": ["ki", "draw", "protection", "removal", "resilience"],
+      "faiblesses": ["Sans Goku Black ni Zamasu en jeu, il ne peut pas s'éveiller.", "Le Ki est posé sur ses cartes : les retirer du terrain lui fait perdre ses ressources."],
+      "menaces": [
+        {"carte": "FB11-063", "pourquoi": "Zamasu rend un Goku Black impossible à KO jusqu'à la fin de ton prochain tour."},
+        {"carte": "FB11-072", "pourquoi": "The Zero Mortal Project : KO d'une carte coût 5 ou moins pour 1 Ki."},
+        {"carte": "FB11-057", "pourquoi": "Rejoue des Goku Black depuis l'énergie et booste tous ses Goku Black."}
+      ],
+      "conseilsContre": [
+        "Avant le tour 3, vise ses Goku Black et Zamasu : sans eux, pas d'éveil.",
+        "Les effets « KO » ne marchent pas sur une carte protégée par Zamasu (FB11-063) : préfère la mise en repos, le retour en main ou l'attaque.",
+        "Il pioche plus que toi en partie longue : joue plutôt la pression et la vitesse."
+      ]
+    },
+    "FB09-001": {
+      "nom": "Gogeta: BR (rouge, Fusion Evolve)",
+      "archetype": "MIDRANGE",
+      "vitesse": 3,
+      "pic": 4,
+      "resume": "Deck très régulier qui fusionne Son Goku: BR et Vegeta: BR en Gogeta: BR pour nettoyer ton terrain à chaque tour, tout en mettant la pression sur tes points de vie. Il gagne souvent aux tours 5-6.",
+      "eveil": "Vie à 5 ou moins : il s'éveille tôt, en ajoutant ses propres vies à sa main.",
+      "plan": {
+        "early": [
+          "Tour 1 : Piccolo: BR (FB09-013) pour chercher une carte BR.",
+          "Tour 2 : Son Goku: BR/Vegeta: BR (FB09-011) : prends 1 vie en main et cherche ; garde-le en mode actif si possible.",
+          "N'attaque qu'avec ton leader au tour 2 : ton terrain doit survivre pour fusionner."
+        ],
+        "mid": [
+          "Tour 3 : Cheelai: BR (FB09-012) permet de poser un Goku ou un Vegeta supplémentaire et de fusionner plus tôt.",
+          "Fusion Evolve en Gogeta: BR, puis l'effet du leader éveillé : KO de cartes adverses totalisant 15000 de puissance ou moins.",
+          "Gogeta: BR 40000 (FB09-121) affaiblit tout le terrain adverse en arrivant."
+        ],
+        "end": [
+          "Tours 5-6 : nettoie le terrain et attaque le leader à 40000-60000.",
+          "La version SCR de Gogeta: BR peut te faire perdre à 1 vie (au lieu de 0) si ton terrain est vide."
+        ]
+      },
+      "mulligan": "Son Goku: BR/Vegeta: BR (FB09-011) est presque obligatoire : sans lui, mulligan.",
+      "forces": ["removal", "power-reduction", "draw", "consistency"],
+      "faiblesses": ["Il doit garder Son Goku: BR et Vegeta: BR en mode actif pour fusionner : les mettre en repos ou les retirer retarde tout.", "Il prend ses propres vies en main : il descend vite en points de vie."],
+      "menaces": [
+        {"carte": "FB09-121", "pourquoi": "Gogeta: BR 40000 qui affaiblit tout ton terrain en arrivant."},
+        {"carte": "FB09-007", "pourquoi": "Gogeta: BR 35000 : finisher qui pousse les dégâts."},
+        {"carte": "FB10-012", "pourquoi": "En attaquant, rend tes Extras plus chers (+2) : tes combos défensifs coûtent plus."}
+      ],
+      "conseilsContre": [
+        "Mets ses Son Goku: BR et Vegeta: BR en repos ou retire-les : sans les deux en mode actif, pas de Fusion Evolve.",
+        "Évite d'avoir beaucoup de petites cartes : son leader éveillé KO jusqu'à 15000 de puissance au total à chaque tour.",
+        "Il descend souvent à 3-4 vies tout seul : une attaque bien préparée peut le finir avant ses tours 5-6."
+      ]
+    },
+    "FB11-073": {
+      "nom": "Shallot / Giblet (jaune)",
+      "archetype": "TEMPO",
+      "vitesse": 3,
+      "pic": 5,
+      "resume": "Deck jaune construit autour de la paire Shallot + Giblet. Ses cartes coût 2 prennent des vies en main et mettent tes cartes en repos, puis il fusionne en Shallet 35000. Ne peut pas jouer d'Evolve de coût 4 ou moins.",
+      "eveil": "Vie à 5 ou moins : très tôt, car ses Shallot ajoutent ses vies à sa main.",
+      "plan": {
+        "early": [
+          "Tour 1 : Bulma (FB11-094) ou Cabba pour chercher.",
+          "Tour 2 : Shallot coût 2 (FB11-086 / FB11-087) : prends une vie en main et mets une carte adverse en repos.",
+          "Giblet coûte 1 de moins si Shallot est en jeu sans Giblet : pose la paire rapidement."
+        ],
+        "mid": [
+          "Avec Shallot et Giblet en jeu, le leader éveillé remet 2 énergies en actif : tu joues deux fois plus.",
+          "Evolve en Shallot 25000 (FB11-088) et Giblet 25000 (FB11-084) qui frappent les cartes en repos.",
+          "Son Goku (FB11-090) coûte 3 de moins avec la paire en jeu."
+        ],
+        "end": [
+          "Shallet 35000 (FB11-122) par Fusion Evolve : la grosse menace de fin de partie.",
+          "Mets les bloqueurs adverses en repos avant les attaques finales."
+        ]
+      },
+      "mulligan": "Garde un Shallot coût 2 et un Giblet coût 2, ou une carte de recherche (Bulma FB11-094).",
+      "forces": ["rest", "draw", "tempo", "life-to-hand"],
+      "faiblesses": ["Tout repose sur la paire Shallot + Giblet : retire l'un des deux et ses effets s'éteignent.", "Il prend ses propres vies : il est souvent bas en points de vie."],
+      "menaces": [
+        {"carte": "FB11-122", "pourquoi": "Shallet 35000 : la fusion de fin de partie."},
+        {"carte": "FB11-081", "pourquoi": "Met 2 de tes cartes coût 4 ou moins en repos : prépare des attaques gratuites."},
+        {"carte": "FB09-096", "pourquoi": "Warrior Who Defeats the Evil Demon : envoie une carte en repos coût 4 ou moins dans ta défausse."}
+      ],
+      "conseilsContre": [
+        "Cible Shallot ou Giblet dès qu'ils sont en jeu : casser la paire coupe son énergie gratuite et ses réductions de coût.",
+        "Il met tes cartes en repos pour les attaquer : n'aligne pas trop de cartes faibles.",
+        "Il descend vite en vie de lui-même : la course aux dégâts est souvent jouable."
+      ]
+    },
+    "FS11-01": {
+      "nom": "Son Goku SSJ3 (jaune, Evolve)",
+      "archetype": "AGGRO",
+      "vitesse": 5,
+      "pic": 4,
+      "resume": "L'ancien roi de la méta FB10. Il pioche et prend une vie en main à chaque fin de tour, puis tue souvent au tour 4 avec deux Son Goku Evolve ou Son Goku + Kamehameha (Double Strike +25000).",
+      "eveil": "Vie à 4 ou moins : il pioche et récupère une vie en s'éveillant. À ne jamais faire avant le tour 3.",
+      "plan": {
+        "early": [
+          "Tour 1 : Son Goku coût 1 (FB09-079) pour chercher.",
+          "Tour 2 : Son Gohan: Adolescence (FS11-09) ou Son Goku (FB09-080) pour mettre 2 cartes adverses en repos ; arrive au tour 3 avec 4-5 vies.",
+          "Ne t'éveille jamais avant le tour 3."
+        ],
+        "mid": [
+          "Tour 3 : un petit Son Goku coût 1, puis Son Goku Evolve 30000 (FS11-07) : le leader éveillé te rend 2 énergies.",
+          "Garde ces 2 énergies pour Results of Training (+15000 en défense) ou une autre menace.",
+          "Warrior Who Defeats the Evil Demon (FB09-096) envoie une carte en repos dans la défausse."
+        ],
+        "end": [
+          "Tour 4 : souvent le tour de la victoire : deux Son Goku Evolve, ou Son Goku + Kamehameha (FS11-17 : Double Strike et +25000).",
+          "Gotenks (FS11-03) coûte 2 de moins et met une carte en repos de plus."
+        ]
+      },
+      "mulligan": "Garde Son Goku coût 1 (FB09-079) et un Son Goku Evolve. Kamehameha n'est pas utile en main de départ.",
+      "forces": ["evolve", "burst", "rest", "draw"],
+      "faiblesses": ["Il s'essouffle après le tour 5 : une défense solide le met en difficulté.", "Ses Evolve doivent rester en jeu : les retirer coupe sa recharge d'énergie."],
+      "menaces": [
+        {"carte": "FS11-17", "pourquoi": "Kamehameha : Double Strike et +25000 sur un Evolve, peut finir la partie depuis 2 vies."},
+        {"carte": "FS11-07", "pourquoi": "Son Goku Evolve 30000 qui recharge 2 énergies avec le leader éveillé."},
+        {"carte": "FS08-15", "pourquoi": "Results of Training : +15000 en défense, avec pioche."}
+      ],
+      "conseilsContre": [
+        "Garde 3 vies ou plus au tour 4 : en dessous, Son Goku + Kamehameha peut te tuer en un tour.",
+        "S'il joue en premier, il a un gros avantage : joue défensivement et garde des combos.",
+        "Tiens jusqu'au tour 6 et il manquera de cartes pour finir."
+      ]
+    },
+    "ST01-053": {
+      "nom": "Vegeta (noir, Wicked Soul)",
+      "archetype": "MIDRANGE",
+      "vitesse": 3,
+      "pic": 4,
+      "resume": "Vegeta noir qui commence avec le terrain Wicked Soul Discovered en jeu et ne peut pas jouer de cartes de coût 5 ou plus. Il charge du Ki sur son leader et le dépense pour des attaques énormes avec ses Vegeta coût 4.",
+      "eveil": "3 Ki sur le leader : vers le tour 3.",
+      "plan": {
+        "early": [
+          "Le terrain Wicked Soul Discovered arrive gratuitement : chaque tour, pour 1 énergie, il donne 1 Ki au leader et filtre ta main.",
+          "Tour 1 : Trunks: Youth/Son Goten (ST01-058) pour chercher.",
+          "Tour 2 : Krillin (FS12-03) ou Vegeta coût 2 : accumule du Ki."
+        ],
+        "mid": [
+          "Avec 3 Ki : éveil, puis Legendary Warrior (FS12-17) coûte 1 et KO une carte de coût 6 ou moins.",
+          "Vegeta coût 4 (ST01-065) dépense 2 Ki pour se remettre en actif et attaquer deux fois.",
+          "Vegeta coût 2 (ST01-063) ne peut pas être retiré par les effets adverses."
+        ],
+        "end": [
+          "Vegeta coût 4 (ST01-071) : tu ne peux pas perdre ce tour-ci ; il retire tout le Ki pour +10000 par Ki : coup final.",
+          "Le leader éveillé gagne +10000 par Ki retiré par tes cartes Wicked Soul pendant le combat."
+        ]
+      },
+      "mulligan": "Garde une carte de recherche (ST01-058) et une source de Ki (Krillin FS12-03).",
+      "forces": ["ki", "removal", "burst", "protection"],
+      "faiblesses": ["Pas de cartes de coût 5 ou plus : il a peu de grosses cartes durables.", "Sans Ki sur le leader, ses meilleurs effets ne marchent pas."],
+      "menaces": [
+        {"carte": "ST01-071", "pourquoi": "Il ne peut pas perdre ce tour-là et frappe avec +10000 par Ki retiré."},
+        {"carte": "FS12-17", "pourquoi": "Legendary Warrior : KO d'une carte coût 6 ou moins pour 1 énergie avec 3 Ki."},
+        {"carte": "ST01-056", "pourquoi": "Empêche une de tes cartes coût 4 ou moins d'attaquer au tour suivant."}
+      ],
+      "conseilsContre": [
+        "Surveille le nombre de Ki sur son leader : à 3, il débloque presque tout son deck.",
+        "Le tour où il joue Vegeta ST01-071, tu ne peux pas gagner : garde tes ressources pour le tour suivant.",
+        "Ses cartes sont petites (coût 4 maximum) : de grosses cartes à 30000+ le gênent."
+      ]
+    },
+    "FB05-025": {
+      "nom": "Vegito (bleu, défausse 20)",
+      "archetype": "MIDRANGE",
+      "vitesse": 3,
+      "pic": 4,
+      "resume": "Vegito bleu remplit sa défausse (place des cartes de son deck dans la défausse). Avec 20 cartes ou plus en défausse, son leader éveillé gagne +20000 pendant son tour et ses Vegito 40000 peuvent obtenir Double Strike.",
+      "eveil": "Vie à 4 ou moins : il place 10 cartes de son deck dans sa défausse en s'éveillant.",
+      "plan": {
+        "early": [
+          "Tour 1 : Son Goku coût 1 (ST01-023) ou Vegeta (FB10-038) : remplis la défausse.",
+          "Tour 2 : Gotenks coût 2 (ST01-021) défausse 5 cartes en attaquant et prend une vie en main.",
+          "Son Goku/Vegeta coût 3 (ST01-024) récupère une carte Potara depuis la défausse."
+        ],
+        "mid": [
+          "Au réveil, 10 cartes de plus en défausse : vise vite 20 cartes.",
+          "Vegito 40000 (ST01-070) en Evolve sur Son Goku/Vegeta.",
+          "Savior of the World (FB05-046) : +15000 en combat pour 0 énergie avec 20 cartes en défausse."
+        ],
+        "end": [
+          "I Call This Version… Super Vegito! (ST01-026) : Double Strike pour tes Vegito à 40000.",
+          "Leader éveillé à 40000 pendant ton tour : chaque attaque oblige l'adversaire à beaucoup défendre."
+        ]
+      },
+      "mulligan": "Garde Son Goku coût 1 (ST01-023) et Gotenks coût 2 (ST01-021).",
+      "forces": ["burst", "self-mill", "draw"],
+      "faiblesses": ["Son deck fond vite : une partie très longue peut le faire perdre par manque de cartes.", "Avant 20 cartes en défausse, il est moyen."],
+      "menaces": [
+        {"carte": "ST01-070", "pourquoi": "Vegito 40000 en Evolve : sa grosse menace."},
+        {"carte": "ST01-026", "pourquoi": "Donne Double Strike à ses Vegito à 40000."},
+        {"carte": "FB05-046", "pourquoi": "Savior of the World : +15000 en combat pour 0 énergie."}
+      ],
+      "conseilsContre": [
+        "Compte les cartes de sa défausse : à 20, son leader passe à 40000 pendant son tour.",
+        "Ne le fais pas descendre à 4 vies trop tôt : son éveil défausse 10 cartes et l'accélère énormément.",
+        "En partie longue, son deck s'épuise : une stratégie défensive peut le battre par manque de cartes."
+      ]
+    },
+    "FB09-025": {
+      "nom": "Son Goku Ultra Instinct (bleu, Tournoi du Pouvoir)",
+      "archetype": "CONTROL",
+      "vitesse": 2,
+      "pic": 4,
+      "resume": "Deck de contrôle technique : il remplit sa défausse de cartes « Universe », s'éveille, puis transforme chaque défausse en pioche. Il renvoie tes cartes au fond du deck et son Son Goku 40000 attaque et défend à la fois.",
+      "eveil": "Vie à 6 ou moins ET 7 cartes « Universe » dans sa défausse : vers le tour 3.",
+      "plan": {
+        "early": [
+          "Tour 1 : Great Priest (FB09-038) ou Zen-Oh (FB09-031) pour remplir la défausse.",
+          "Tour 2 : Vegeta coût 2 (FB09-044) : prends une vie, cherche une carte du Tournoi du Pouvoir.",
+          "Attaque surtout avec le leader au début."
+        ],
+        "mid": [
+          "Tour 3 : éveil ; chaque défausse par un Evolve ou une carte Tournoi devient une pioche.",
+          "Vegeta 35000 (FB09-045) défausse 2 cartes pour retirer jusqu'à 2 cartes adverses de coût 4 ou moins.",
+          "Tour 4 : Son Goku 40000 (FB09-037) : remet 4 cartes de la défausse sous le deck pour attaquer à nouveau ou détourner une attaque."
+        ],
+        "end": [
+          "Kefla (FB08-034) avec Double Strike pour finir un adversaire à 2 vies.",
+          "Divine Domain (+15000 pour 0 énergie) épuise les combos adverses."
+        ]
+      },
+      "mulligan": "Garde Great Priest ou Zen-Oh, plus Vegeta coût 2 (FB09-044).",
+      "forces": ["removal", "draw", "control", "defense"],
+      "faiblesses": ["Lent : il souffre contre les decks qui frappent fort avant le tour 3.", "Les réductions de puissance massives (−25000) font tomber son Son Goku."],
+      "menaces": [
+        {"carte": "FB09-037", "pourquoi": "Son Goku 40000 : attaque deux fois ou détourne une attaque en recyclant sa défausse."},
+        {"carte": "FB09-045", "pourquoi": "Retire jusqu'à 2 de tes cartes de coût 4 ou moins."},
+        {"carte": "FB08-034", "pourquoi": "Kefla : Double Strike pour finir."}
+      ],
+      "conseilsContre": [
+        "Frappe tôt et fort : il est vulnérable avant son éveil au tour 3.",
+        "Évite de dépendre de cartes de coût 4 ou moins en milieu de partie : il les retire facilement.",
+        "Garde 2 vies de marge en fin de partie à cause de Kefla (Double Strike)."
+      ]
+    },
+    "FB09-097": {
+      "nom": "Gogeta: GT (noir, Ki)",
+      "archetype": "CONTROL",
+      "vitesse": 2,
+      "pic": 5,
+      "resume": "Contrôle noir qui génère du Ki et des marqueurs d'énergie, défend en début de partie puis écrase tout au tour 5 avec Gogeta: GT 40000 (et son tour supplémentaire dans la version SCR).",
+      "eveil": "Vie à 4 ou moins, OU 2 Ki au total en jeu : souvent au tour 2-3.",
+      "plan": {
+        "early": [
+          "Tour 1 : Bulla: GT (FB09-114) pour chercher ; utilise-la aussi pour défendre.",
+          "Tour 2 : Pan: GT (FB09-112) génère 1 Ki et un marqueur d'énergie : vital si tu joues en premier.",
+          "Garde environ 6 vies jusqu'au tour 5."
+        ],
+        "mid": [
+          "Vegeta: GT coût 4 (FB09-117) gagne +5000 par Ki pendant ton tour : ne l'envoie pas attaquer, garde-le en actif.",
+          "Son Goku: GT (FB09-100) retire du Ki pour KO toutes les cartes adverses de coût inférieur ou égal.",
+          "Big Bang Kamehameha (FB09-120) se paie avec 2 Ki : contrôle des grosses menaces."
+        ],
+        "end": [
+          "Tour 5+ : Gogeta: GT 40000 (FB09-123) : pioche 2 en attaquant et génère des ressources.",
+          "La version SCR offre un tour supplémentaire : garde Trunks: GT pour en profiter au tour 6."
+        ]
+      },
+      "mulligan": "Garde Bulla: GT et Pan: GT. Pan au tour 2 est la clé si tu joues en premier.",
+      "forces": ["ki", "removal", "ramp", "defense"],
+      "faiblesses": ["Lent avant le tour 5 : les decks rapides peuvent le tuer avant.", "Son Vegeta: GT est faible en défense (bonus seulement pendant son tour)."],
+      "menaces": [
+        {"carte": "FB09-123", "pourquoi": "Gogeta: GT 40000 : sa condition de victoire au tour 5."},
+        {"carte": "FB09-100", "pourquoi": "KO toutes tes cartes de coût inférieur ou égal au Ki retiré."},
+        {"carte": "FB05-115", "pourquoi": "Ultimate Sparking : +20000 en défense et peut empêcher une carte d'attaquer."}
+      ],
+      "conseilsContre": [
+        "Sois agressif avant le tour 5 : c'est là qu'il est le plus faible.",
+        "Attaque son Vegeta: GT pendant TON tour : ses bonus de Ki ne marchent que pendant le sien.",
+        "N'aligne pas plein de cartes bon marché : Son Goku: GT les KO toutes d'un coup."
+      ]
+    },
+    "FB10-097": {
+      "nom": "Cell (noir, Androïdes)",
+      "archetype": "MIDRANGE",
+      "vitesse": 3,
+      "pic": 5,
+      "resume": "Cell utilise ses Androïdes comme combos depuis la zone de combat, ce qui réduit le coût de ses Evolve. Il monte jusqu'à Cell 40000 avec Double Strike.",
+      "eveil": "Vie à 5 ou moins : assez tôt.",
+      "plan": {
+        "early": [
+          "Tour 1 : Android 17 (FB10-101) pour chercher un Androïde.",
+          "Tour 2 : Android 17/Android 18 (FB10-102) : utilisable en combo même en repos, et pioche quand il sert en combo.",
+          "Cell coût 1 (FB10-108) prend une vie en main et prépare les Evolve."
+        ],
+        "mid": [
+          "Utiliser un Androïde en combo depuis le terrain réduit le coût de Cell's Kamehameha (FB10-118) et des Evolve.",
+          "Cell coût 4 (FB10-110 / FB10-109) en Evolve, puis Cell 35000 (FB10-111) qui ne peut pas être KO.",
+          "Le leader éveillé joue jusqu'à 2 Androïdes de coût combiné 2 pour 1 énergie."
+        ],
+        "end": [
+          "Cell 40000 (FB10-123) avec Double Strike : 2 dégâts par attaque.",
+          "Cell's Kamehameha : retire une menace avant l'assaut final."
+        ]
+      },
+      "mulligan": "Garde Android 17 (FB10-101) et Android 17/18 (FB10-102).",
+      "forces": ["burst", "protection", "removal", "defense"],
+      "faiblesses": ["S'il ne peut pas utiliser ses Androïdes en combo, ses coûts restent élevés.", "Ses Evolve demandent plusieurs étapes : le ralentir tôt est efficace."],
+      "menaces": [
+        {"carte": "FB10-123", "pourquoi": "Cell 40000 avec Double Strike."},
+        {"carte": "FB10-111", "pourquoi": "Cell 35000 qui ne peut pas être KO pendant un tour complet."},
+        {"carte": "FB10-118", "pourquoi": "Cell's Kamehameha : retire une de tes cartes."}
+      ],
+      "conseilsContre": [
+        "Retire ses Androïdes du terrain : ce sont ses réducteurs de coût.",
+        "Contre Cell 35000 (impossible à KO), préfère le mettre en repos ou attaquer son leader.",
+        "Garde 2 vies de marge contre Cell 40000 (Double Strike)."
+      ]
+    },
+    "FB10-001": {
+      "nom": "Son Goku « Bombku » (rouge, Genki-dama)",
+      "archetype": "COMBO",
+      "vitesse": 3,
+      "pic": 5,
+      "resume": "Deck de Terriens qui accumule du Ki, le concentre sur le leader, inflige des dégâts directs avec Krillin, puis termine avec Super Genki-dama (attaque triple du leader).",
+      "eveil": "2 Ki au total en jeu : tour 2-3.",
+      "plan": {
+        "early": [
+          "Tour 1 : Vegeta (FB10-016) ou Son Goku coût 1 pour chercher ; utilise le marqueur d'énergie si tu joues en second.",
+          "Tour 2 : Krillin (FB10-005 / FB10-006) et Upa : chaque carte se met 1 Ki.",
+          "Everyone on Earth (FB10-014) pioche et génère du Ki chaque tour."
+        ],
+        "mid": [
+          "Le leader éveillé récupère tout le Ki de ton terrain : il gagne +10000 en attaque si son Ki a augmenté.",
+          "Krillin (FB10-006) inflige 1 dégât direct si tu as 5 Ki et que l'adversaire a 5 vies ou plus.",
+          "Hercule (FB10-021) pose 2 Terriens coût 2 depuis le haut du deck."
+        ],
+        "end": [
+          "Super Genki-dama (FB10-024) : retire 7 Ki ou plus du leader pour une attaque Triple Strike.",
+          "Thanks, Dragon Ball!!! (FB10-023) envoie une carte adverse de 35000 ou moins dans la défausse."
+        ]
+      },
+      "mulligan": "Garde Krillin et une carte de recherche Terrienne.",
+      "forces": ["ki", "burn", "burst", "draw"],
+      "faiblesses": ["Si le Ki de ses cartes est retiré avant d'être transféré au leader, il perd du temps.", "Il fait peu de contrôle avant la fin de partie."],
+      "menaces": [
+        {"carte": "FB10-024", "pourquoi": "Super Genki-dama : Triple Strike du leader avec 7 Ki."},
+        {"carte": "FB10-006", "pourquoi": "Dégât direct sans attaquer."},
+        {"carte": "FB10-023", "pourquoi": "Envoie une de tes cartes jusqu'à 35000 en défausse."}
+      ],
+      "conseilsContre": [
+        "Compte le Ki sur son leader : à 7, Super Genki-dama peut te retirer 3 vies d'un coup.",
+        "KO ses Terriens qui portent du Ki avant qu'il ne les transfère au leader.",
+        "Garde au moins 4 vies quand il approche les 7 Ki."
+      ]
+    },
+    "SB02-001": {
+      "nom": "Trunks: Future (rouge, Salle de l'Esprit et du Temps)",
+      "archetype": "MIDRANGE",
+      "vitesse": 3,
+      "pic": 4,
+      "resume": "Trunks rouge pose le terrain Hyperbolic Time Chamber et prépare des Evolve Saiyans à prix réduit. Une fois éveillé, ses cartes Evolve sont protégées des KO pendant ton tour.",
+      "eveil": "Vie à 4 ou moins : il pioche 1 en s'éveillant ; ses cartes prennent souvent des vies en main pour y arriver.",
+      "plan": {
+        "early": [
+          "Pose Hyperbolic Time Chamber (SB02-016) dès que possible : il réduit le coût de tes Evolve.",
+          "Videl (FB08-019) et Trunks: Future coût 2 (SB02-010) prennent une vie en main et cherchent.",
+          "Les petits Son Goku et Vegeta (SB02-003, SB02-014) remontent en main et se glissent sous la Chambre."
+        ],
+        "mid": [
+          "Son Goku 30000 (FB11-011) et Vegeta 25000 (FB11-022) en Evolve à prix réduit.",
+          "Son Goku 35000 (FB11-121) : −20000 de puissance sur une carte adverse.",
+          "Leader éveillé : si une carte Evolve devait être KO pendant le tour adverse, il met la Chambre en repos à la place."
+        ],
+        "end": [
+          "Enchaîne les Evolve protégés et attaque avec Critical (Vegeta FB11-022) pour envoyer les vies adverses en défausse."
+        ]
+      },
+      "mulligan": "Garde Hyperbolic Time Chamber ou une carte qui le cherche, plus un Son Goku coût 1.",
+      "forces": ["evolve", "protection", "power-reduction"],
+      "faiblesses": ["Sans la Chambre, ses Evolve coûtent cher et ne sont pas protégés.", "Protection limitée au tour adverse et une seule fois par tour (la Chambre passe en repos)."],
+      "menaces": [
+        {"carte": "SB02-016", "pourquoi": "Hyperbolic Time Chamber : réductions de coût et protection contre les KO."},
+        {"carte": "FB11-121", "pourquoi": "Son Goku 35000 : −20000 de puissance sur une de tes cartes."},
+        {"carte": "FB11-022", "pourquoi": "Vegeta avec Critical : tes vies vont dans la défausse."}
+      ],
+      "conseilsContre": [
+        "Si tu dois KO une carte Evolve, fais-le de façon répétée : la Chambre ne la sauve qu'une fois par tour adverse.",
+        "Les réductions de puissance et les mises en repos contournent sa protection contre les KO.",
+        "Il prend ses propres vies : la course aux dégâts est possible."
+      ]
+    },
+    "FS05-01": {
+      "nom": "Bardock (noir, starter / combos)",
+      "archetype": "AGGRO",
+      "vitesse": 4,
+      "pic": 5,
+      "resume": "Ancien Bardock noir orienté combos : son leader éveillé utilise la carte du dessus du deck en combo, et ses Bardock 35000 avec Double Strike ou Critical frappent très fort.",
+      "eveil": "Vie à 4 ou moins : pioche 1 en s'éveillant.",
+      "plan": {
+        "early": [
+          "Fasha (FS05-04) et Bardock coût 1 (FB11-110) pour piocher ou chercher.",
+          "Bardock coût 2 (FB07-109) : se sacrifie pour piocher 2 et réduire le coût du prochain Bardock's Crew.",
+          "Prends quelques dégâts pour t'éveiller vers le tour 3."
+        ],
+        "mid": [
+          "New Legend (FB03-135) joue un Bardock coût 5 depuis la main.",
+          "Bardock 20000 (FB03-121) se remet en actif quand tu utilises une carte en combo pendant son combat."
+        ],
+        "end": [
+          "Bardock 35000 Double Strike (FS05-11) : KO une carte avec 2 cartes dans ta zone de combo.",
+          "Bardock 30000 Critical (FB05-106) : les vies adverses touchées vont dans la défausse."
+        ]
+      },
+      "mulligan": "Garde une carte de pioche/recherche et New Legend ou un Bardock coût 5.",
+      "forces": ["burst", "removal", "aggro"],
+      "faiblesses": ["Il a besoin de beaucoup de combos pour ses effets : sans main, il cale.", "Peu de défense une fois qu'il s'est engagé."],
+      "menaces": [
+        {"carte": "FS05-11", "pourquoi": "Bardock 35000 Double Strike qui peut KO une carte en combat."},
+        {"carte": "FB05-106", "pourquoi": "Bardock Critical : tes vies vont en défausse."},
+        {"carte": "FB03-135", "pourquoi": "New Legend : sort un Bardock coût 5 rapidement."}
+      ],
+      "conseilsContre": [
+        "Garde 2 vies de marge à cause de Double Strike.",
+        "S'il vide sa main pour attaquer, contre-attaque fort le tour suivant.",
+        "Les cartes impossibles à KO résistent bien à ses effets de KO en combat."
+      ]
+    },
+    "FS12-01": {
+      "nom": "Son Goku (noir, Namek)",
+      "archetype": "MIDRANGE",
+      "vitesse": 3,
+      "pic": 5,
+      "resume": "Son Goku de Namek : il charge du Ki, recycle ses cartes de Namek depuis la défausse en combos, et termine avec Son Goku 45000 Critical.",
+      "eveil": "Vie à 4 ou moins, OU 2 Ki sur le leader : il gagne 1 Ki en s'éveillant.",
+      "plan": {
+        "early": [
+          "Bulma (FS12-14) cherche une carte de Namek ; Guru (FS12-04) donne du Ki.",
+          "Krillin (FS12-03) et Son Gohan: Youth (FS12-09) : +1 Ki au leader en attaquant.",
+          "Vise 3 Ki rapidement pour Legendary Warrior à coût réduit."
+        ],
+        "mid": [
+          "Legendary Warrior (FS12-17) : KO d'une carte coût 6 ou moins.",
+          "Le leader éveillé retire du Ki pour utiliser des cartes de Namek de la défausse en combo : défense très solide.",
+          "Kaio-ken x20 (FS12-18) : +5000 par Ki."
+        ],
+        "end": [
+          "Son Goku 45000 Critical (FS12-07), moins cher avec 3 Ki : tes vies vont dans la défausse.",
+          "Son Gohan: Youth donne Double Strike à ton Son Goku avec 4 Ki."
+        ]
+      },
+      "mulligan": "Garde Bulma (FS12-14) et une source de Ki.",
+      "forces": ["ki", "removal", "defense", "burst"],
+      "faiblesses": ["Sans Ki, ni défense recyclée ni réductions de coût.", "Son finisher coûte cher sans 3 Ki."],
+      "menaces": [
+        {"carte": "FS12-07", "pourquoi": "Son Goku 45000 Critical."},
+        {"carte": "FS12-17", "pourquoi": "Legendary Warrior : KO pour 1 énergie avec 3 Ki."},
+        {"carte": "FS12-09", "pourquoi": "Donne Double Strike à son Son Goku avec 4 Ki."}
+      ],
+      "conseilsContre": [
+        "Ses défenses viennent du Ki : force-le à le dépenser en attaquant souvent.",
+        "Sa défausse est une ressource : chaque carte de Namek KO peut revenir en combo.",
+        "Garde 2 vies de marge à partir de 4 Ki (Double Strike possible)."
+      ]
+    },
+    "FB02-105": {
+      "nom": "Vegeta (jaune, contrôle repos)",
+      "archetype": "CONTROL",
+      "vitesse": 2,
+      "pic": 5,
+      "resume": "Contrôle jaune : il met tes cartes en repos, les empêche de se relever, et défend avec beaucoup d'Extras puissants. Son leader éveillé remet 2 énergies en actif à la fin de son tour pour défendre.",
+      "eveil": "Vie à 4 ou moins.",
+      "plan": {
+        "early": [
+          "Vegeta (FS11-13) met une carte adverse en repos ; Whis (FB08-075) récupère un Extra jaune de la défausse.",
+          "Garde de l'énergie pour Results of Training et Time Rewound pendant le tour adverse."
+        ],
+        "mid": [
+          "Son Goku (FB02-119) : une carte en repos ne peut pas se relever.",
+          "Blue Power Awakening (FB02-136) : KO d'une carte en repos de coût 6 ou plus, ou +25000 en défense.",
+          "Majin Buu et Babidi avec Barrier : impossibles à cibler par tes effets."
+        ],
+        "end": [
+          "Leader éveillé : 2 énergies se remettent en actif à la fin de son tour → beaucoup de défense.",
+          "Quand tu n'as plus de combos, il retourne la partie avec des attaques sûres."
+        ]
+      },
+      "mulligan": "Garde des cartes de mise en repos et au moins un Extra défensif.",
+      "forces": ["rest", "defense", "control", "barrier"],
+      "faiblesses": ["Peu de pression : il laisse du temps aux decks à gros finisher.", "Ses Extras sont sa ressource : quand il n'en a plus, il s'effondre."],
+      "menaces": [
+        {"carte": "FB02-136", "pourquoi": "KO une de tes grosses cartes en repos, ou +25000 en défense."},
+        {"carte": "FB07-096", "pourquoi": "Pendant ton tour : tes cartes de coût 5 ou plus ne peuvent plus attaquer."},
+        {"carte": "FB02-137", "pourquoi": "+20000 en défense et remet une carte en actif."}
+      ],
+      "conseilsContre": [
+        "Fais plusieurs attaques moyennes plutôt qu'une seule énorme : il a beaucoup de défenses ponctuelles.",
+        "Attention : avec And Don't Dream of Resurrecting Again!, tes cartes de coût 5+ peuvent être bloquées pour le tour.",
+        "Ses Majin Buu et Babidi ont Barrier : attaque-les plutôt que de les cibler avec des effets."
+      ]
+    },
+    "FB08-073": {
+      "nom": "Broly (jaune)",
+      "archetype": "MIDRANGE",
+      "vitesse": 3,
+      "pic": 5,
+      "resume": "Broly jaune met tes cartes en repos et les gèle, puis pose Broly 40000. Son leader éveillé (25000) oblige l'adversaire à mettre une carte en repos pour chaque attaque.",
+      "eveil": "Vie à 3 ou moins : tard, mais ses cartes prennent des vies en main pour l'accélérer.",
+      "plan": {
+        "early": [
+          "Kakarot (FB08-076) et Broly coût 2 (ST01-048) pour chercher.",
+          "Broly coût 2 (ST01-049) : prend une vie en main et met une carte adverse en repos."
+        ],
+        "mid": [
+          "Broly 30000 (ST01-051) : met une carte en repos ; peut ensuite sortir un Broly plus gros.",
+          "Paragus (FB08-084) protège un Broly des effets adverses pendant un tour."
+        ],
+        "end": [
+          "Broly 40000 (FB08-122) : gèle toutes tes cartes en repos et empêche ton leader d'attaquer.",
+          "Leader éveillé à 25000 : chaque attaque adverse coûte une carte en repos."
+        ]
+      },
+      "mulligan": "Garde Kakarot ou Broly coût 2 (recherche).",
+      "forces": ["rest", "lock", "defense"],
+      "faiblesses": ["Il s'éveille tard (3 vies) : il est fragile s'il ne contrôle pas le terrain.", "Ses gros Broly coûtent cher : le presser tôt marche bien."],
+      "menaces": [
+        {"carte": "FB08-122", "pourquoi": "Broly 40000 : gèle toutes tes cartes en repos et bloque ton leader."},
+        {"carte": "ST01-050", "pourquoi": "Broly 40000 en Evolve."},
+        {"carte": "FB08-084", "pourquoi": "Paragus : rend un Broly insensible à tes effets pendant un tour."}
+      ],
+      "conseilsContre": [
+        "Garde des cartes en mode actif : ses effets punissent les cartes en repos.",
+        "Une fois éveillé, chaque attaque te coûte une carte en repos : prévois assez de cartes.",
+        "Il est lent à s'éveiller : presse-le avant qu'il ne pose Broly 40000."
+      ]
+    },
+    "FB05-072": {
+      "nom": "Janemba (jaune, énergie)",
+      "archetype": "TEMPO",
+      "vitesse": 3,
+      "pic": 4,
+      "resume": "Janemba relève son énergie en attaquant, ce qui lui permet de jouer et de défendre beaucoup dans le même tour. Ses Janemba prennent des vies en main et mettent tes cartes en repos.",
+      "eveil": "Vie à 4 ou moins.",
+      "plan": {
+        "early": [
+          "Saike Demon (FB05-075 / FB09-076) pour piocher et chercher un Janemba.",
+          "Janemba coût 2 (FB09-077) prend une vie en main et pioche."
+        ],
+        "mid": [
+          "Janemba coût 3 (FB05-080) remet une énergie en actif et met une carte adverse en repos.",
+          "Leader éveillé : chaque attaque remet 2 énergies en actif."
+        ],
+        "end": [
+          "Janemba Critical (FB06-078) gagne +15000 avec 5 énergies actives.",
+          "Gogeta 40000 (FB09-122) en Evolve dans certaines listes."
+        ]
+      },
+      "mulligan": "Garde Saike Demon et un Janemba coût 2.",
+      "forces": ["tempo", "rest", "draw"],
+      "faiblesses": ["Il prend ses propres vies : il est souvent bas en points de vie.", "Peu de retrait direct."],
+      "menaces": [
+        {"carte": "FB06-078", "pourquoi": "Janemba Critical avec +15000."},
+        {"carte": "FB05-080", "pourquoi": "Met une de tes cartes en repos et relance son énergie."}
+      ],
+      "conseilsContre": [
+        "Il a souvent de l'énergie active pendant ton tour : attends-toi à des défenses.",
+        "Il descend vite en vie : la course aux dégâts est jouable."
+      ]
+    },
+    "SB01-029": {
+      "nom": "Majin Buu: Evil (jaune, Majin)",
+      "archetype": "MIDRANGE",
+      "vitesse": 3,
+      "pic": 4,
+      "resume": "Les Majin Buu: Kid se sacrifient et reviennent, gèlent tes cartes en repos et vident ta main si tu as beaucoup de cartes. Majin Buu: Kid 35000 a Double Strike.",
+      "eveil": "Vie à 4 ou moins.",
+      "plan": {
+        "early": [
+          "Bibidi (FB04-086) cherche un Majin ; Babidi (SB01-031) a Barrier et relève un Majin à la fin de ton tour.",
+          "Majin Buu: Pure Evil (SB01-040) met une carte adverse en repos."
+        ],
+        "mid": [
+          "Majin Buu: Kid 30000 (SB01-039) ne peut pas être KO par les effets adverses et gèle les cartes adverses.",
+          "Evil Itself (SB01-044) : KO de 2 cartes en repos de coût 4 ou moins."
+        ],
+        "end": [
+          "Majin Buu: Kid 35000 (FB04-094) avec Double Strike, qui pose un autre Majin depuis la main.",
+          "Leader éveillé : gèle une carte en repos adverse chaque tour."
+        ]
+      },
+      "mulligan": "Garde Bibidi et Babidi.",
+      "forces": ["rest", "lock", "removal", "protection", "burst"],
+      "faiblesses": ["Il sacrifie ses propres cartes : il lui faut un terrain fourni.", "Peu de pioche hors de ses Majin Buu."],
+      "menaces": [
+        {"carte": "FB04-094", "pourquoi": "Majin Buu: Kid 35000 Double Strike."},
+        {"carte": "SB01-044", "pourquoi": "Evil Itself : KO de 2 de tes cartes en repos."},
+        {"carte": "SB01-039", "pourquoi": "Majin Buu: Kid impossible à KO par tes effets."}
+      ],
+      "conseilsContre": [
+        "N'attaque pas avec toutes tes petites cartes : celles en repos se font geler ou KO.",
+        "Garde moins de 6 cartes en main face à Majin Buu: Evil (FB04-093) sinon tu en défausses.",
+        "Garde 2 vies de marge contre Double Strike."
+      ]
+    },
+    "FB09-049": {
+      "nom": "Son Gohan: SH (vert, Ki)",
+      "archetype": "COMBO",
+      "vitesse": 3,
+      "pic": 5,
+      "resume": "Gohan: SH accumule du Ki sur son leader et prépare un gros tour 5 : Piccolo pose Son Gohan: SH, puis Son Gohan: SH 50000 avec Double Strike et Special Beam Cannon finissent la partie. Facile à piloter.",
+      "eveil": "2 Ki sur le leader : tour 2-3.",
+      "plan": {
+        "early": [
+          "Pan: SH (FB07-063) cherche ; Gotenks: SH (FB09-055) et Son Gohan: Adolescence/Piccolo (FB10-057) donnent du Ki au leader.",
+          "Special Beam Cannon (FB09-072) : 1 énergie pour piocher 1 et +1 Ki. Mieux qu'une carte coût 2 en début de partie.",
+          "Défends avec tes cartes à 10000 de combo et garde tes vies hautes."
+        ],
+        "mid": [
+          "Gamma 2: SH (FB09-052) KO une carte de coût 3 ou moins avec 3 Ki.",
+          "Piccolo: SH (FB09-068) cherche une pièce du combo."
+        ],
+        "end": [
+          "Tour 5 : Piccolo (FB10-070) joue Son Gohan: SH ; attaque avec tout, puis Son Gohan: SH (FB09-059) se transforme en Son Gohan: SH 50000 (FB09-060) avec Double Strike.",
+          "Special Beam Cannon retire le Ki du leader : +10000 par Ki pour une attaque finale."
+        ]
+      },
+      "mulligan": "Garde une source de Ki (Gotenks: SH, FB10-057) et Pan: SH.",
+      "forces": ["ki", "burst", "defense"],
+      "faiblesses": ["Il dépend de son tour 5 : si on le tue avant ou si on casse le combo, il n'a pas de plan B.", "Peu de contrôle en début de partie."],
+      "menaces": [
+        {"carte": "FB09-060", "pourquoi": "Son Gohan: SH 50000 avec Double Strike : le finisher."},
+        {"carte": "FB09-072", "pourquoi": "Special Beam Cannon : +10000 par Ki retiré du leader."},
+        {"carte": "FB10-070", "pourquoi": "Piccolo pose un Son Gohan gratuitement."}
+      ],
+      "conseilsContre": [
+        "Garde au moins 3 vies au tour 5 : son combo peut retirer 3-4 vies en un tour.",
+        "Si son leader a beaucoup de Ki, attends-toi à une attaque énorme avec Special Beam Cannon.",
+        "Mets la pression tôt pour qu'il utilise ses cartes en défense au lieu de préparer son combo."
+      ]
+    },
+    "ST01-001": {
+      "nom": "Son Goten (rouge, Kamehameha)",
+      "archetype": "AGGRO",
+      "vitesse": 4,
+      "pic": 4,
+      "resume": "Son Goten utilise de nombreux Kamehameha (+20000 en combat) et le terrain Fate Transcending Generations pour charger du Ki et attaquer plusieurs fois.",
+      "eveil": "Selon le Ki accumulé sur le leader ; les Kamehameha accélèrent tout.",
+      "plan": {
+        "early": [
+          "Son Goten coût 1 (ST01-006) cherche un Kamehameha ou une carte « Son ».",
+          "Le terrain Fate Transcending Generations arrive gratuitement depuis le deck."
+        ],
+        "mid": [
+          "Son Goten/Son Gohan: Adolescence (ST01-008) rejoue un Son Goku coût 2 depuis la défausse.",
+          "Son Gohan: Adolescence (ST01-011) se relève quand tu utilises un Kamehameha."
+        ],
+        "end": [
+          "Family Kamehameha (ST01-015) retire 5 Ki ou plus pour une attaque énorme."
+        ]
+      },
+      "mulligan": "Garde Son Goten coût 1 et un Kamehameha.",
+      "forces": ["burst", "ki", "aggro"],
+      "faiblesses": ["Ses Kamehameha sont aussi ses défenses : s'il les utilise pour attaquer, il défend mal.", "Peu de retrait."],
+      "menaces": [
+        {"carte": "ST01-015", "pourquoi": "Family Kamehameha : énorme bonus de puissance en retirant le Ki."},
+        {"carte": "ST01-016", "pourquoi": "Kamehameha : +20000 en combat et recherche."}
+      ],
+      "conseilsContre": [
+        "Ses attaques sont boostées de +20000 : défends quand il a peu de cartes en main.",
+        "Il manque de retrait : de grosses cartes durables le gênent."
+      ]
+    },
+    "FB10-025": {
+      "nom": "Son Goku/Vegeta → Vegito (bleu, Potara)",
+      "archetype": "AGGRO",
+      "vitesse": 4,
+      "pic": 4,
+      "resume": "Il empile des cartes sous ses Evolve grâce à Potara : son leader éveillé gagne +10000 par carte sous l'Evolve choisi. Vegito FB10-121 fait défausser 15 cartes par dégât quand tu es à 2 vies ou moins (victoire par deck vide).",
+      "eveil": "Vie à 4 ou moins : pioche 1.",
+      "plan": {
+        "early": [
+          "Tour 1 : Son Goku (FB10-031) ou Vegeta (FB10-038) : place Potara et l'autre moitié dans la défausse.",
+          "Tour 2 : glisse Vegeta et Potara sous la base, puis Evolve dessus."
+        ],
+        "mid": [
+          "Tour 3 : Vegito 35000 (FB10-040) en priorité : +5000 à ton leader jusqu'à la fin du tour adverse (leader à 25000 en défense).",
+          "Leader éveillé : attaques à 40000-50000 qui forcent l'adversaire à vider sa main."
+        ],
+        "end": [
+          "Tour 4 : Vegito 40000 (FB10-121) pour seulement 2 énergies grâce à Potara : pioche 3.",
+          "Chaque dégât quand l'adversaire est à 2 vies ou moins lui fait défausser 15 cartes de son deck."
+        ]
+      },
+      "mulligan": "Garde Son Goku FB10-031 ou Vegeta FB10-038 (recherche).",
+      "forces": ["burst", "evolve", "mill", "defense"],
+      "faiblesses": ["Si l'Evolve qui porte les cartes empilées est retiré, il perd tous ses bonus.", "Peu de cartes défensives (Extras)."],
+      "menaces": [
+        {"carte": "FB10-121", "pourquoi": "Vegito : à 2 vies ou moins, chaque dégât te fait défausser 15 cartes du deck."},
+        {"carte": "FB10-040", "pourquoi": "Vegito 35000 : +5000 à son leader en défense."},
+        {"carte": "FB10-045", "pourquoi": "Final Kamehameha : retire une de tes cartes."}
+      ],
+      "conseilsContre": [
+        "Retire ses Evolve avec des cartes empilées dessous : c'est là qu'est toute sa puissance.",
+        "Ne descends pas à 2 vies face à Vegito FB10-121 : tu perdrais ton deck très vite.",
+        "Ses attaques sont énormes : défends les plus dangereuses et prends les petits dégâts tôt."
+      ]
+    },
+    "FB04-001": {
+      "nom": "Son Goku (rouge, Univers 7)",
+      "archetype": "MIDRANGE",
+      "vitesse": 3,
+      "pic": 4,
+      "resume": "Midrange rouge classique : Vegeta −15000 en attaquant, Beerus KO toutes les cartes de 15000 ou moins, Frieza intouchable pendant un tour.",
+      "eveil": "Vie à 3 ou moins : son leader copie la puissance d'une carte en combat.",
+      "plan": {
+        "early": ["Shin (FB04-007) cherche une carte de l'Univers 7.", "Vegeta coût 2 Critical (FS01-14) met la pression."],
+        "mid": ["Beerus (FB04-017) KO toutes tes cartes de 15000 ou moins.", "Son Goku 30000 (FB04-011) gagne +10000 pendant ton tour."],
+        "end": ["Frieza (FB04-018) ne peut pas être retiré et gagne +20000.", "Le leader éveillé copie la puissance de sa plus grosse carte."]
+      },
+      "mulligan": "Garde Shin et une carte coût 2.",
+      "forces": ["removal", "power-reduction", "defense"],
+      "faiblesses": ["S'éveille tard (3 vies).", "Moins de pioche que les decks récents."],
+      "menaces": [
+        {"carte": "FB04-017", "pourquoi": "Beerus : KO de toutes tes cartes de 15000 ou moins."},
+        {"carte": "FB04-018", "pourquoi": "Frieza : impossible à retirer et +20000 pendant un tour."}
+      ],
+      "conseilsContre": ["N'aligne pas de petites cartes face à Beerus.", "Son Goku FB04-011 est très solide pendant ton tour : attaque autre chose."]
+    },
+    "FB10-049": {
+      "nom": "Son Gohan: Youth / Piccolo (vert, Ki)",
+      "archetype": "COMBO",
+      "vitesse": 3,
+      "pic": 4,
+      "resume": "Accumule du Ki directement sur ses cartes Son Gohan avec Piccolo, s'éveille avec 3 Ki, puis au tour 4 Piccolo pose un Son Gohan gratuit qui frappe à 50000.",
+      "eveil": "Vie à 3 ou moins, OU 3 Ki au total : tour 2-3.",
+      "plan": {
+        "early": ["Piccolo (FB10-065) cherche ; Son Gohan: Adolescence/Piccolo (FB10-057) donne du Ki.", "Mets le Ki sur ton leader ou tes Son Gohan pour qu'il ne soit pas retiré."],
+        "mid": ["Tour 4 : réduis le coût de Piccolo avec le leader, Piccolo joue un Son Gohan gratuitement.", "Attaquer avec Piccolo donne +5000 au leader jusqu'au tour adverse."],
+        "end": ["Son Gohan: Childhood (FP-088) se relève et prend +20000 ; finis avec Double Strike/Double Attack."]
+      },
+      "mulligan": "Garde Piccolo FB10-065 et une source de Ki.",
+      "forces": ["ki", "burst", "removal"],
+      "faiblesses": ["Considéré un cran en dessous de la méta.", "Retirer ses Son Gohan avec du Ki casse son combo."],
+      "menaces": [
+        {"carte": "FP-088", "pourquoi": "Son Gohan: Childhood qui se relève avec +20000."},
+        {"carte": "FB10-057", "pourquoi": "KO d'une carte coût 1 ou moins à chaque attaque."}
+      ],
+      "conseilsContre": ["Retire ses cartes Son Gohan chargées en Ki.", "Prévois une défense pour son tour 4."]
+    },
+    "FB08-001": {
+      "nom": "Son Gohan: Adolescence (rouge, Son)",
+      "archetype": "AGGRO",
+      "vitesse": 4,
+      "pic": 4,
+      "resume": "Il met en repos deux cartes « Son » pour donner +30000 à une attaque, et Son Goten gagne Double Strike quand l'adversaire est à 2 vies ou moins.",
+      "eveil": "Vie à 4 ou moins.",
+      "plan": {
+        "early": ["Son Goku coût 2 (FB08-007) cherche 2 cartes « Son ».", "Videl et Son Gohan: Adolescence coût 3 prennent des vies en main pour accélérer l'éveil."],
+        "mid": ["Leader éveillé : +30000 sur une attaque en mettant 2 cartes « Son » en repos."],
+        "end": ["Son Goten 25000 (FB08-121) : Double Strike quand l'adversaire est à 2 vies ou moins."]
+      },
+      "mulligan": "Garde Son Goku FB08-007.",
+      "forces": ["aggro", "burst"],
+      "faiblesses": ["Prend ses propres vies : fragile en défense.", "Peu de retrait."],
+      "menaces": [{"carte": "FB08-121", "pourquoi": "Double Strike quand tu es à 2 vies ou moins."}],
+      "conseilsContre": ["Ne descends pas à 2 vies.", "Il se fragilise seul : contre-attaque."]
+    },
+    "FS04-01": {
+      "nom": "Frieza (jaune)",
+      "archetype": "MIDRANGE",
+      "vitesse": 3,
+      "pic": 5,
+      "resume": "Frieza jaune remet 2 de ses cartes en actif à la fin de son tour : il attaque et défend avec les mêmes cartes. Il joue de grosses cartes à 35000 (Golden Frieza Double Strike).",
+      "eveil": "Vie à 4 ou moins.",
+      "plan": {
+        "early": ["Pioche avec Yamu et les cartes à bas coût."],
+        "mid": ["Bio-Broly (FB05-084) relance 2 énergies."],
+        "end": ["Golden Frieza (FS04-03) Double Strike gèle une carte en repos.", "Leader éveillé : 2 cartes se relèvent en fin de tour pour défendre."]
+      },
+      "mulligan": "Garde des cartes de pioche et de coût bas.",
+      "forces": ["burst", "defense"],
+      "faiblesses": ["Moins régulier que les decks de la méta."],
+      "menaces": [{"carte": "FS04-03", "pourquoi": "Golden Frieza Double Strike."}],
+      "conseilsContre": ["Ses cartes se relèvent : elles défendent même après avoir attaqué.", "Garde 2 vies de marge contre Double Strike."]
+    },
+    "FB04-077": {
+      "nom": "Majin Buu: Evil (jaune, ancien)",
+      "archetype": "MIDRANGE",
+      "vitesse": 3,
+      "pic": 4,
+      "resume": "Version plus ancienne des Majin : quand un Majin est KO, le leader éveillé se relève ou relance une énergie. Majin Buu: Kid 35000 Double Strike.",
+      "eveil": "Vie à 4 ou moins.",
+      "plan": {
+        "early": ["Bibidi (FB04-086) cherche ; Babidi (FB04-085) pose un Majin."],
+        "mid": ["Majin Buu: Evil (FB04-093) sacrifie un Majin pour piocher et te faire défausser si tu as 6 cartes ou plus."],
+        "end": ["Majin Buu: Kid 35000 Double Strike (FB04-094)."]
+      },
+      "mulligan": "Garde Bibidi.",
+      "forces": ["burst", "resilience"],
+      "faiblesses": ["Plus lent que la version SB01."],
+      "menaces": [{"carte": "FB04-094", "pourquoi": "Double Strike."}],
+      "conseilsContre": ["Garde moins de 6 cartes en main.", "Garde 2 vies de marge."]
+    },
+    "FB10-073": {
+      "nom": "Boujack (jaune, aggro)",
+      "archetype": "AGGRO",
+      "vitesse": 5,
+      "pic": 5,
+      "resume": "Aggro pur : il te force à défendre tôt (ou à prendre des dégâts), puis enchaîne au tour 5 une séquence de Slug et Boujack qui se rejouent pour attaquer 6-7 fois.",
+      "eveil": "Vie à 4 ou moins, OU 2 Ki sur le leader.",
+      "plan": {
+        "early": ["Joueur 2 : Gokua avec le marqueur d'énergie au tour 1 pour générer du Ki.", "Zangya (FP-089) au tour 2 : sa pioche ; Slug au tour 3.", "Attaque sans utiliser tes combos : garde ta main."],
+        "mid": ["Loyal Shield (FB10-095) : sacrifie une carte pour piocher et bloquer."],
+        "end": ["Tour 5 : Boujack 30000 → Boujack 35000 qui appelle Slug → Slug rappelle Slug → le leader KO Slug pour se relever → Majin Buu: Pure Evil gratuit. 6-7 attaques en un tour."]
+      },
+      "mulligan": "Garde Zangya et Slug.",
+      "forces": ["aggro", "burst"],
+      "faiblesses": ["Pas de retrait.", "Souffre beaucoup contre les leaders à 25000.", "S'essouffle après le tour 5."],
+      "menaces": [{"carte": "FB10-091", "pourquoi": "Boujack : lance la séquence finale."}, {"carte": "FB10-082", "pourquoi": "Slug : revient de la défausse."}],
+      "conseilsContre": ["Garde un maximum de combos pour son tour 5 : s'il ne te tue pas là, il a perdu.", "Un leader à 25000 en défense le bloque presque complètement."]
+    },
+    "FB06-048": {
+      "nom": "Broly: BR (vert, rampe)",
+      "archetype": "MIDRANGE",
+      "vitesse": 2,
+      "pic": 5,
+      "resume": "Rampe verte : il accélère son énergie et fait grandir ses Broly: BR un par un jusqu'à Broly: BR 55000 Double Strike.",
+      "eveil": "Vie à 4 ou moins.",
+      "plan": {
+        "early": ["Nappa (FB04-064) met une vie dans l'énergie : accélération.", "Cheelai: BR (FB07-060) pose Broly: BR coût 4 avec 4 énergies."],
+        "mid": ["Leader éveillé : sacrifie un Broly: BR pour poser le Broly: BR suivant (coût +1)."],
+        "end": ["Broly: BR 45000 (FS03-10) KO une carte ; Broly: BR 55000 (FB06-120) Double Strike."]
+      },
+      "mulligan": "Garde Nappa et Cheelai: BR.",
+      "forces": ["ramp", "burst", "removal"],
+      "faiblesses": ["Lent avant 4-5 énergies."],
+      "menaces": [{"carte": "FB06-120", "pourquoi": "Broly: BR 55000 Double Strike."}, {"carte": "FS03-10", "pourquoi": "KO une carte en arrivant."}],
+      "conseilsContre": ["Frappe vite avant qu'il n'atteigne 5 énergies.", "Garde 2 vies de marge."]
+    }
+  },
+  "matchups": {
+    "FS11-01|FS11-01": {"avantage": 0, "note": "Miroir : celui qui commence a un gros avantage. Si tu joues en second, défends beaucoup, garde de l'énergie pour Results of Training et reste à 3 vies le plus longtemps possible. Inutile d'empêcher l'adversaire de s'éveiller : le deck a trop de moyens de le faire seul."},
+    "FS11-01|FB09-001": {"avantage": 0, "note": "Ne descends jamais à 2 vies avant ton tour de victoire : le Gogeta: BR SCR peut te finir. Gagne en 5 tours environ, sinon tu perds à l'usure. Préfère mettre ses cartes en repos plutôt que les détruire."},
+    "FS11-01|FB09-049": {"avantage": 1, "note": "Bon matchup : tu frappes fort avant son tour 5. Mets la pression pour qu'il utilise ses cartes en défense."},
+    "FS11-01|FB09-097": {"avantage": 1, "note": "Bon matchup : tu es bien plus rapide que lui. Tue-le avant le tour 5."},
+    "FS11-01|FB10-073": {"avantage": -1, "note": "Matchup difficile : Boujack te met la pression dès le début et ses attaques répétées du tour 5 percent ta défense."},
+    "FS11-01|FB09-025": {"avantage": -1, "note": "Matchup difficile : ses retraits et son Son Goku 40000 qui redirige les attaques gênent tes Evolve."},
+    "FB09-001|FB09-097": {"avantage": 1, "note": "Bon matchup : tu nettoies son terrain avant que son Ki ne devienne dangereux."},
+    "FB09-001|FB09-049": {"avantage": 1, "note": "Bon matchup : tes retraits répétés ralentissent son combo du tour 5."},
+    "FB09-001|FB10-097": {"avantage": -1, "note": "Matchup difficile : Cell 35000 ne peut pas être KO et ses Androïdes réduisent ses coûts."},
+    "FB09-001|FB10-073": {"avantage": -1, "note": "Matchup difficile : la pression de Boujack t'empêche de garder tes Son Goku: BR et Vegeta: BR en vie pour fusionner."},
+    "FB09-049|FB10-097": {"avantage": -1, "note": "Cell est un matchup difficile pour Gohan: SH selon la communauté."},
+    "FB09-049|FB10-073": {"avantage": -1, "note": "Boujack frappe avant ton tour 5 : défends très tôt."},
+    "FB09-049|FB10-025": {"avantage": 1, "note": "Bon matchup selon la communauté."},
+    "FB09-049|FB10-001": {"avantage": 1, "note": "Bon matchup selon la communauté."},
+    "FB09-025|FS11-01": {"avantage": 1, "note": "Excellent contre les decks jaunes : tes retraits et ton Son Goku 40000 neutralisent leurs Evolve."},
+    "FB09-025|FB09-001": {"avantage": -1, "note": "Attention aux réductions de puissance (−25000) de Gogeta: BR : elles font tomber ton Son Goku."},
+    "FB09-025|FB09-049": {"avantage": -2, "note": "Très difficile contre le vert de Gohan: SH selon la communauté."},
+    "FB05-025|FS11-01": {"avantage": 1, "note": "Tu domines généralement SSJ3 Goku."},
+    "FB05-025|FB09-001": {"avantage": 1, "note": "Tu domines généralement Gogeta: BR."},
+    "FB10-025|FS11-01": {"avantage": 1, "note": "Ta stratégie de défausse massive annule l'avantage de pioche de SSJ3 Goku."},
+    "FB10-025|FB09-001": {"avantage": 1, "note": "Tu domines généralement Gogeta: BR."},
+    "FB10-025|FS12-01": {"avantage": -2, "note": "Matchup terrible contre Namek : sois extrêmement agressif dès le début pour épuiser ses combos."},
+    "FB10-025|FB09-025": {"avantage": -1, "note": "Ultra Instinct contrôle bien tes Evolve : reste agressif."},
+    "FB10-025|FB10-025": {"avantage": 0, "note": "Miroir : celui qui pose le plus de Vegito gagne en général. Utilise Vegeta en priorité."},
+    "FB10-073|FB09-049": {"avantage": 1, "note": "Bon matchup : tu frappes avant son combo du tour 5."},
+    "FB10-073|FB09-097": {"avantage": -1, "note": "Matchup difficile : défends tes vies tôt pour survivre jusqu'à ton combo."},
+    "FB10-073|FB10-025": {"avantage": -1, "note": "Matchup difficile : son leader en défense est trop solide pour tes attaques."},
+    "FB10-001|FB10-097": {"avantage": 1, "note": "Bon matchup selon la communauté."},
+    "FB10-001|FB09-049": {"avantage": -1, "note": "Matchup difficile selon la communauté."},
+    "FB09-097|FB10-025": {"avantage": 1, "note": "Bon matchup selon la communauté."},
+    "FB09-097|FB10-073": {"avantage": 1, "note": "Bon matchup : ta défense du début de partie absorbe son agressivité."},
+    "FB09-097|FB10-001": {"avantage": 1, "note": "Bon matchup selon la communauté."},
+    "FB09-097|FB09-001": {"avantage": -1, "note": "Gogeta: BR nettoie ton terrain avant que ton Ki ne paie."},
+    "FB09-097|FS11-01": {"avantage": -1, "note": "SSJ3 Goku est trop rapide : survis jusqu'au tour 5."},
+    "FB11-001|FB11-001": {"avantage": 0, "note": "Miroir : celui qui fait évoluer le premier en Son Goku 35000 prend l'avantage. Garde des réponses pour son Trunks: Youth (Double Strike)."}
+  }
+}

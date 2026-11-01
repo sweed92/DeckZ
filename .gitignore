@@ -1,0 +1,12 @@
+.gradle/
+.kotlin/
+build/
+app/build/
+local.properties
+.idea/
+*.iml
+*.apk
+*.keystore
+*.jks
+# Copies de pages de sites tiers : voir tools/fetch-fixtures.sh
+app/src/test/resources/
