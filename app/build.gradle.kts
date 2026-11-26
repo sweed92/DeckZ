@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.plugin.compose")
@@ -23,7 +25,7 @@ android {
     // sur GitHub elle vient des secrets, sur un PC d'un fichier keystore.properties (non versionné).
     // Sans elle, Android Studio garde sa clé de debug habituelle.
     val localKeys = rootProject.file("keystore.properties").takeIf { it.exists() }
-        ?.let { f -> java.util.Properties().apply { f.inputStream().use { load(it) } } }
+        ?.let { f -> Properties().apply { f.inputStream().use { load(it) } } }
     val storePath = System.getenv("DECKZ_KEYSTORE") ?: localKeys?.getProperty("storeFile")
     val storePw = System.getenv("DECKZ_KEYSTORE_PASSWORD") ?: localKeys?.getProperty("password")
     val shared = if (storePath != null && storePw != null) signingConfigs.create("shared") {
