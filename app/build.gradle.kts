@@ -14,7 +14,26 @@ android {
         minSdk = 26
         targetSdk = 36
         versionCode = 1
-        versionName = "1.0"
+        // Sur GitHub, le numéro de build est ajouté automatiquement (ex. 1.0.12).
+        versionName = (findProperty("deckzVersionName") as String?) ?: "1.0"
+    }
+
+    // Clé de signature commune : un APK construit sur GitHub s'installe par-dessus le précédent
+    // sans désinstaller (et donc sans perdre les notes). La clé n'est jamais dans le dépôt :
+    // sur GitHub elle vient des secrets, sur un PC d'un fichier keystore.properties (non versionné).
+    // Sans elle, Android Studio garde sa clé de debug habituelle.
+    val localKeys = rootProject.file("keystore.properties").takeIf { it.exists() }
+        ?.let { f -> java.util.Properties().apply { f.inputStream().use { load(it) } } }
+    val storePath = System.getenv("DECKZ_KEYSTORE") ?: localKeys?.getProperty("storeFile")
+    val storePw = System.getenv("DECKZ_KEYSTORE_PASSWORD") ?: localKeys?.getProperty("password")
+    val shared = if (storePath != null && storePw != null) signingConfigs.create("shared") {
+        storeFile = rootProject.file(storePath)
+        storePassword = storePw
+        keyAlias = "deckz"
+        keyPassword = storePw
+    } else null
+    buildTypes {
+        getByName("debug") { shared?.let { signingConfig = it } }
     }
     buildFeatures { compose = true }
     testOptions { unitTests.isReturnDefaultValues = true }

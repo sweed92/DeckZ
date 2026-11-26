@@ -35,6 +35,8 @@ L'APK est généré dans `app/build/outputs/apk/debug/app-debug.apk`. Pour l'ins
 adb install -r app/build/outputs/apk/debug/app-debug.apk
 ```
 
+**APK automatique** : à chaque envoi sur `main`, GitHub Actions construit l'APK et le publie dans les Releases. Dernière version : <https://github.com/sweed92/DeckZ/releases/latest/download/DeckZ.apk>. La clé de signature est dans les secrets du dépôt (`DECKZ_KEYSTORE_BASE64`, `DECKZ_KEYSTORE_PASSWORD`), jamais dans le code. Pour signer pareil sur un PC, poser `deckz.jks` à la racine et créer `keystore.properties` (non versionné) avec `storeFile=deckz.jks` et `password=...`.
+
 **Signature** : un build debug est signé avec la clé de debug de la machine. Un APK compilé sur un autre PC ne s'installe pas par-dessus l'ancien : il faut désinstaller d'abord, et le cache sera retéléchargé (2 à 3 minutes).
 
 ## Organisation du code

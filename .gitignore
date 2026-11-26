@@ -8,5 +8,6 @@ local.properties
 *.apk
 *.keystore
 *.jks
+keystore.properties
 # Copies de pages de sites tiers : voir tools/fetch-fixtures.sh
 app/src/test/resources/
