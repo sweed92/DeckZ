@@ -54,9 +54,9 @@ data class ProfileBook(
 }
 
 enum class Archetype(val label: String, val blurb: String) {
-    AGGRO("Aggro", "frappe tôt et fort, veut finir vite"),
+    AGGRO("Agressif", "frappe tôt et fort, veut finir vite"),
     TEMPO("Tempo", "gagne du temps sur l'adversaire (repos, renvois) tout en attaquant"),
-    MIDRANGE("Midrange", "solide à tous les stades, gagne sur la qualité de ses cartes"),
+    MIDRANGE("Polyvalent", "solide à tous les stades, gagne sur la qualité de ses cartes"),
     CONTROL("Contrôle", "survit, retire tes menaces puis gagne en fin de partie"),
     COMBO("Combo", "prépare un tour explosif qui retire beaucoup de vies d'un coup");
 

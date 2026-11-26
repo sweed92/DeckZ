@@ -126,12 +126,12 @@ fun MatchupScreen(c: AppContainer, meUid: Int, oppUid: Int, onBack: () -> Unit, 
                 VariantChips(variants, variantIdx) { variantIdx = it }
             }
             item { Section("⚡", "Plan express", Orange, listOf(p.role) + p.express.drop(1), expanded = true) }
-            item { Section("🌅", "Early game · tours 1-2", Color(0xFF6FA8FF), p.early) }
-            item { Section("🔥", "Mid game · tours 3-4", Orange, p.mid) }
-            item { Section("🐉", "End game · tour 5 et +", Color(0xFFFF5A5A), p.end) }
+            item { Section("🌅", "Début de partie · tours 1-2", Color(0xFF6FA8FF), p.early) }
+            item { Section("🔥", "Milieu de partie · tours 3-4", Orange, p.mid) }
+            item { Section("🐉", "Fin de partie · tour 5 et +", Color(0xFFFF5A5A), p.end) }
             item { Section("⚠", "Pièges à éviter", Gold, p.pitfalls) }
             if (p.watch.isNotEmpty()) item { WatchRow(p, onCard) }
-            item { Section("🃏", "Mulligan", Color(0xFF3DDC84), p.mulligan) }
+            item { Section("🃏", "Main de départ (mulligan)", Color(0xFF3DDC84), p.mulligan) }
             item(key = "player_notes") { PlayerNotesCard(c, m.leader.number, o.leader.number) }
             p.curatedNote?.let { note -> item { Section("📝", "Note d'analyse", Orange, listOf(note), expanded = true) } }
             if (p.community.isNotEmpty()) item { CommunityCard(p) }
@@ -185,7 +185,7 @@ private fun VerdictCard(p: MatchupPlan) {
             .border(1.dp, col.copy(alpha = 0.5f), RoundedCornerShape(16.dp)).padding(14.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Text("Matchup", style = MaterialTheme.typography.titleLarge.copy(fontSize = 22.sp))
+            Text("Affrontement", style = MaterialTheme.typography.titleLarge.copy(fontSize = 22.sp))
             Spacer(Modifier.width(10.dp))
             VerdictPill(p.verdict, mirror = p.mirror)
             Spacer(Modifier.weight(1f))
@@ -351,7 +351,7 @@ private fun CommunityCard(p: MatchupPlan) {
             if (n.text.isNotBlank()) Text(n.text, style = MaterialTheme.typography.bodySmall, lineHeight = 17.sp, modifier = Modifier.padding(top = 4.dp))
             TextButton(onClick = { runCatching { uri.openUri(n.url) } }) { Text("Lire le guide complet (en anglais)", color = Orange) }
         }
-        Text("Source : db-fusionworld.com (deck profiles).", style = MaterialTheme.typography.labelSmall, color = Muted)
+        Text("Source : db-fusionworld.com (profils de decks).", style = MaterialTheme.typography.labelSmall, color = Muted)
     }
 }
 
@@ -364,9 +364,9 @@ private fun GlossaryCard() {
             "Combo : pendant l'attaque adverse, tu peux défausser des cartes de ta main pour ajouter leur puissance de combo à ton défenseur.",
             "Ki : marqueur d'énergie posé sous une carte. Beaucoup de decks récents le cumulent puis le dépensent pour des effets.",
             "Mode repos : une carte qui a attaqué (ou qu'on a « reposée ») est tournée ; une carte en repos peut être attaquée par l'adversaire.",
-            "Evolve : se joue par-dessus une carte précise déjà en jeu, souvent pour un coût réduit.",
-            "Double Strike / Critical : l'attaque retire 2 vies, ou envoie la vie touchée dans la défausse (l'adversaire ne la récupère pas en main).",
-            "Blocker : peut se mettre en repos pour devenir la cible d'une attaque à la place.",
+            "Évolution (Evolve) : se joue par-dessus une carte précise déjà en jeu, souvent pour un coût réduit.",
+            "Double frappe / Critique (Double Strike / Critical) : l'attaque retire 2 vies, ou envoie la vie touchée dans la défausse (l'adversaire ne la récupère pas en main).",
+            "Bloqueur (Blocker) : peut se mettre en repos pour devenir la cible d'une attaque à la place.",
             "Tour fort : le tour où un deck fait son jeu le plus puissant ; prépare ta défense le tour d'avant.",
         ),
     )

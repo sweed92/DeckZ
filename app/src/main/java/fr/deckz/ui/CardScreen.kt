@@ -89,7 +89,7 @@ fun CardScreen(c: AppContainer, uid: Int, onBack: () -> Unit) {
             Text(k.number + (k.rarity?.let { " · $it" } ?: ""), color = Muted)
             Spacer(Modifier.height(12.dp))
             Column(Modifier.fillMaxWidth().clip(RoundedCornerShape(14.dp)).background(Panel).padding(14.dp)) {
-                Info("Type", k.type.lowercase().replaceFirstChar { it.uppercase() })
+                Info("Type", when (k.type) { "LEADER" -> "Leader"; "BATTLE" -> "Combat"; "EXTRA" -> "Extra"; else -> k.type.lowercase().replaceFirstChar { it.uppercase() } })
                 Info("Couleur", GameColors.label(k.color))
                 k.cost?.let { Info("Coût", it.toString()) }
                 k.power?.let { Info("Puissance", it) }
@@ -119,7 +119,7 @@ private fun Effect(title: String, text: String) {
     Column(Modifier.fillMaxWidth().padding(top = 12.dp).clip(RoundedCornerShape(14.dp)).background(Panel).padding(14.dp)) {
         Text(title.uppercase(), color = Orange, style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
         Spacer(Modifier.height(6.dp))
-        Text(text, lineHeight = 21.sp)
+        TranslatedText(text, lineHeight = 21.sp)
         Spacer(Modifier.height(2.dp))
         Box(Modifier.width(40.dp).height(2.dp).background(Gold.copy(alpha = 0.4f)))
     }

@@ -150,9 +150,9 @@ private fun LeaderHeader(card: Card, stats: LeaderStats?) {
             color = Muted, style = MaterialTheme.typography.bodySmall)
         Spacer(Modifier.height(12.dp))
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            StatBox(stats?.tier ?: "—", "Tier", Modifier.weight(1f), color = tierColor(stats?.tier))
+            StatBox(stats?.tier ?: "—", "Niveau", Modifier.weight(1f), color = tierColor(stats?.tier))
             StatBox(stats?.decks?.toString() ?: "0", "Decks", Modifier.weight(1f))
-            StatBox(stats?.topCuts?.toString() ?: "0", "Top cuts", Modifier.weight(1f))
+            StatBox(stats?.topCuts?.toString() ?: "0", "Phases finales", Modifier.weight(1f))
             StatBox(stats?.wins?.toString() ?: "0", "Victoires", Modifier.weight(1f), color = Gold)
         }
         stats?.let {
@@ -175,7 +175,7 @@ private fun EffectBox(title: String, text: String, accent: androidx.compose.ui.g
     ) {
         Text(title.uppercase(), color = accent, style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
         Spacer(Modifier.height(4.dp))
-        Text(text, style = MaterialTheme.typography.bodyMedium, lineHeight = 20.sp)
+        TranslatedText(text, style = MaterialTheme.typography.bodyMedium, lineHeight = 20.sp)
     }
 }
 

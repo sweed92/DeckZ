@@ -88,7 +88,7 @@ fun SettingsScreen(c: AppContainer, onBack: () -> Unit) {
             }
             Spacer(Modifier.height(24.dp))
             Text(
-                "Sources : DeckPlanet (méta, decks, base de cartes), db-fusionworld.com (deck profiles). Application personnelle non officielle, " +
+                "Sources : DeckPlanet (méta, decks, base de cartes), db-fusionworld.com (profils de decks). Application personnelle non officielle, " +
                     "sans lien avec Bandai. Requêtes limitées à 1 par seconde.",
                 color = Muted, style = MaterialTheme.typography.bodySmall,
             )
