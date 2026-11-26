@@ -67,9 +67,11 @@ object CardTranslator {
                 client.downloadModelIfNeeded(DownloadConditions.Builder().build()).await()
                 modelReady = true
             }
-            text.lines().joinToString("\n") { line ->
-                if (line.isBlank()) line else client.translate(protectKeywords(line)).await()
+            val out = ArrayList<String>()
+            for (line in text.lines()) {
+                out += if (line.isBlank()) line else client.translate(protectKeywords(line)).await()
             }
+            out.joinToString("\n")
         }.getOrNull()?.also { cache[text] = it }
     }
 
