@@ -17,6 +17,8 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -35,17 +37,21 @@ import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -59,6 +65,7 @@ import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -76,6 +83,7 @@ import fr.deckz.ui.theme.Muted
 import fr.deckz.ui.theme.Night
 import fr.deckz.ui.theme.Orange
 import fr.deckz.ui.theme.Panel
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -124,6 +132,7 @@ fun MatchupScreen(c: AppContainer, meUid: Int, oppUid: Int, onBack: () -> Unit, 
             item { Section("⚠", "Pièges à éviter", Gold, p.pitfalls) }
             if (p.watch.isNotEmpty()) item { WatchRow(p, onCard) }
             item { Section("🃏", "Mulligan", Color(0xFF3DDC84), p.mulligan) }
+            item(key = "player_notes") { PlayerNotesCard(c, m.leader.number, o.leader.number) }
             p.curatedNote?.let { note -> item { Section("📝", "Note d'analyse", Orange, listOf(note), expanded = true) } }
             if (p.community.isNotEmpty()) item { CommunityCard(p) }
             item { GlossaryCard() }
@@ -238,6 +247,69 @@ private fun Bullet(text: String, accent: Color = Orange, small: Boolean = false)
         Text("•", color = accent, fontWeight = FontWeight.Bold, modifier = Modifier.width(14.dp))
         Text(text, style = if (small) MaterialTheme.typography.bodySmall else MaterialTheme.typography.bodyMedium,
             lineHeight = if (small) 17.sp else 20.sp)
+    }
+}
+
+/** Bloc « Stratégie de joueurs » : un texte libre par matchup, sauvegardé automatiquement sur le téléphone. */
+@Composable
+private fun PlayerNotesCard(c: AppContainer, meNumber: String, oppNumber: String) {
+    val accent = Color(0xFFB388FF)
+    val saved = remember(meNumber, oppNumber) { c.notes.get(meNumber, oppNumber) }
+    var text by rememberSaveable(meNumber, oppNumber) { mutableStateOf(saved) }
+    var open by rememberSaveable("player_notes") { mutableStateOf(saved.isNotBlank()) }
+    val rot by animateFloatAsState(if (open) 180f else 0f, label = "chevron")
+
+    // Sauvegarde automatique, une demi-seconde après la dernière frappe.
+    LaunchedEffect(meNumber, oppNumber, text) {
+        delay(500)
+        c.notes.set(meNumber, oppNumber, text)
+    }
+    // Et à la sortie de l'écran, pour ne rien perdre si on quitte juste après avoir tapé.
+    val latest by rememberUpdatedState(text)
+    DisposableEffect(meNumber, oppNumber) {
+        onDispose { c.notes.set(meNumber, oppNumber, latest) }
+    }
+
+    Column(
+        Modifier.fillMaxWidth().padding(16.dp, 5.dp).clip(RoundedCornerShape(14.dp)).background(Panel)
+            .animateContentSize()
+    ) {
+        Row(Modifier.fillMaxWidth().clickable { open = !open }.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+            Box(Modifier.size(34.dp).clip(RoundedCornerShape(10.dp)).background(accent.copy(alpha = 0.18f)), contentAlignment = Alignment.Center) {
+                Text("🧠", fontSize = 17.sp)
+            }
+            Spacer(Modifier.width(12.dp))
+            Column(Modifier.weight(1f)) {
+                Text("Stratégie de joueurs", style = MaterialTheme.typography.titleMedium)
+                if (!open && text.isNotBlank()) {
+                    Text(text.lineSequence().first(), style = MaterialTheme.typography.labelSmall, color = Muted,
+                        maxLines = 1, overflow = TextOverflow.Ellipsis)
+                }
+            }
+            Icon(Icons.Default.KeyboardArrowDown, null, tint = Muted, modifier = Modifier.rotate(rot))
+        }
+        AnimatedVisibility(open) {
+            Column(Modifier.padding(start = 14.dp, end = 14.dp, bottom = 14.dp)) {
+                Box(Modifier.fillMaxWidth().height(1.dp).background(accent.copy(alpha = 0.25f)))
+                Spacer(Modifier.height(8.dp))
+                OutlinedTextField(
+                    value = text,
+                    onValueChange = { text = it },
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 140.dp),
+                    placeholder = { Text("Tes notes sur ce matchup : ce qui a marché, les cartes à garder, les habitudes des joueurs…", color = Muted) },
+                    textStyle = MaterialTheme.typography.bodyMedium,
+                    keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = accent,
+                        unfocusedBorderColor = accent.copy(alpha = 0.35f),
+                        cursorColor = accent,
+                    ),
+                )
+                Spacer(Modifier.height(4.dp))
+                Text("Enregistré automatiquement sur ce téléphone, pour ce matchup uniquement.",
+                    style = MaterialTheme.typography.labelSmall, color = Muted)
+            }
+        }
     }
 }
 
