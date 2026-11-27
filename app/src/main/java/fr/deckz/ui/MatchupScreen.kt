@@ -133,13 +133,13 @@ fun MatchupScreen(c: AppContainer, meUid: Int, oppUid: Int, onBack: () -> Unit, 
                 VariantChips(variants, variantIdx) { variantIdx = it }
             }
             item { Section("⚡", "Plan express", Orange, listOf(p.role) + p.express.drop(1), expanded = true) }
+            item(key = "player_notes") { PlayerNotesCard(c, m.leader.number, o.leader.number) }
             item { Section("🌅", "Early game · tours 1-2", Color(0xFF6FA8FF), p.early) }
             item { Section("🔥", "Mid game · tours 3-4", Orange, p.mid) }
             item { Section("🐉", "End game · tour 5 et +", Color(0xFFFF5A5A), p.end) }
             item { Section("⚠", "Pièges à éviter", Gold, p.pitfalls) }
             if (p.watch.isNotEmpty()) item { WatchRow(p, onCard) }
             item { Section("🃏", "Mulligan", Color(0xFF3DDC84), p.mulligan) }
-            item(key = "player_notes") { PlayerNotesCard(c, m.leader.number, o.leader.number) }
             item(key = "games") { GamesCard(c, m.leader.number, o.leader.number, myDeck?.id, p.verdict, p.mirror) }
             p.curatedNote?.let { note -> item { Section("📝", "Note d'analyse", Orange, listOf(note), expanded = true) } }
             if (p.community.isNotEmpty()) item { CommunityCard(p) }
@@ -229,9 +229,9 @@ private fun Section(icon: String, title: String, accent: Color, lines: List<Stri
     val rot by animateFloatAsState(if (open) 180f else 0f, label = "chevron")
     Column(
         Modifier.fillMaxWidth().padding(16.dp, 5.dp).clip(RoundedCornerShape(14.dp)).background(Panel)
-            .animateContentSize()
+            .border(1.dp, accent.copy(alpha = 0.45f), RoundedCornerShape(14.dp))
     ) {
-        Row(Modifier.fillMaxWidth().clickable { open = !open }.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
             Box(Modifier.size(34.dp).clip(RoundedCornerShape(10.dp)).background(accent.copy(alpha = 0.18f)), contentAlignment = Alignment.Center) {
                 Text(icon, fontSize = 17.sp)
             }
@@ -264,8 +264,6 @@ private fun PlayerNotesCard(c: AppContainer, meNumber: String, oppNumber: String
     val accent = Color(0xFFB388FF)
     val saved = remember(meNumber, oppNumber) { c.user.note(meNumber, oppNumber) }
     var text by rememberSaveable(meNumber, oppNumber) { mutableStateOf(saved) }
-    var open by rememberSaveable("player_notes") { mutableStateOf(saved.isNotBlank()) }
-    val rot by animateFloatAsState(if (open) 180f else 0f, label = "chevron")
 
     // Sauvegarde automatique, une demi-seconde après la dernière frappe.
     LaunchedEffect(meNumber, oppNumber, text) {
@@ -289,21 +287,17 @@ private fun PlayerNotesCard(c: AppContainer, meNumber: String, oppNumber: String
             Spacer(Modifier.width(12.dp))
             Column(Modifier.weight(1f)) {
                 Text("Stratégie de joueurs", style = MaterialTheme.typography.titleMedium)
-                if (!open && text.isNotBlank()) {
-                    Text(text.lineSequence().first(), style = MaterialTheme.typography.labelSmall, color = Muted,
-                        maxLines = 1, overflow = TextOverflow.Ellipsis)
-                }
+                Text("Mes notes sur cet affrontement", style = MaterialTheme.typography.labelSmall, color = Muted)
             }
-            Icon(Icons.Default.KeyboardArrowDown, null, tint = Muted, modifier = Modifier.rotate(rot))
         }
-        AnimatedVisibility(open) {
+        run {
             Column(Modifier.padding(start = 14.dp, end = 14.dp, bottom = 14.dp)) {
                 Box(Modifier.fillMaxWidth().height(1.dp).background(accent.copy(alpha = 0.25f)))
                 Spacer(Modifier.height(8.dp))
                 OutlinedTextField(
                     value = text,
                     onValueChange = { text = it },
-                    modifier = Modifier.fillMaxWidth().heightIn(min = 140.dp),
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 110.dp),
                     placeholder = { Text("Tes notes sur ce matchup : ce qui a marché, les cartes à garder, les habitudes des joueurs…", color = Muted) },
                     textStyle = MaterialTheme.typography.bodyMedium,
                     keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
