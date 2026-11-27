@@ -89,11 +89,12 @@ fun LeaderScreen(
     var tab by rememberSaveable { mutableIntStateOf(0) }
     val favs by c.user.favorites.collectAsStateWithLifecycle()
     val art by c.user.art.collectAsStateWithLifecycle()
-    val versions by remember(card?.number) { card?.number?.let { repo.leaderVersions(it) } ?: flowOf(emptyList()) }
+    val baseUid = card?.let { it.variantOf ?: it.uid }
+    val versions by remember(baseUid) { baseUid?.let { repo.leaderVersions(it) } ?: flowOf(emptyList()) }
         .collectAsStateWithLifecycle(emptyList())
     // Garde à jour les adresses d'images de l'illustration choisie (au cas où la source les change).
     LaunchedEffect(versions, art) {
-        val number = card?.number ?: return@LaunchedEffect
+        val number = card?.artKey ?: return@LaunchedEffect
         val chosen = art[number] ?: return@LaunchedEffect
         versions.firstOrNull { it.uid == chosen.uid }?.let { v ->
             if (v.imageUrl != chosen.imageUrl || v.backImageUrl != chosen.backImageUrl) c.user.setArt(number, LeaderArt(v.uid, v.imageUrl, v.backImageUrl))
@@ -127,8 +128,8 @@ fun LeaderScreen(
             item { StaleBanner(sync.lastSuccess, sync.lastFailed && !sync.running) }
             item { LeaderHeader(leader, stats) }
             if (versions.size > 1) item {
-                VersionsRow(versions, selectedUid = art[leader.number]?.uid ?: versions.first().uid) { v ->
-                    c.user.setArt(leader.number, if (v.variantOf == null) null else LeaderArt(v.uid, v.imageUrl, v.backImageUrl))
+                VersionsRow(versions, selectedUid = art[leader.artKey]?.uid ?: versions.first().uid) { v ->
+                    c.user.setArt(leader.artKey, if (v.variantOf == null) null else LeaderArt(v.uid, v.imageUrl, v.backImageUrl))
                 }
             }
             item { BattlePlanButton { onMatchups(uid) } }
@@ -174,7 +175,8 @@ private fun VersionsRow(versions: List<Card>, selectedUid: Int, onSelect: (Card)
                         corner = 8.dp, contentDescription = v.name,
                     )
                     Text(
-                        if (i == 0) "Normale" else if (versions.size == 2) "Alternative" else "Alternative $i",
+                        (if (i == 0) "Normale" else if (versions.size == 2) "Alternative" else "Alternative $i") +
+                            (v.rarity?.takeIf { '★' in it || '*' in it }?.let { " · $it" } ?: ""),
                         style = MaterialTheme.typography.labelSmall, color = if (sel) Orange else Muted,
                         fontWeight = if (sel) FontWeight.Bold else FontWeight.Normal, modifier = Modifier.padding(top = 4.dp),
                     )

@@ -34,7 +34,7 @@ class Repository(context: Context, private val db: AppDb, private val scraper: S
     fun leaders() = dao.leaders()
     fun card(uid: Int) = dao.card(uid)
     fun stats(uid: Int) = dao.stats(uid)
-    fun leaderVersions(number: String) = dao.leaderVersions(number)
+    fun leaderVersions(baseUid: Int) = dao.leaderVersions(baseUid)
     fun usage(uid: Int) = dao.usage(uid)
     fun decksOf(uid: Int) = dao.decksOf(uid)
     fun deck(id: String) = dao.deck(id)

@@ -37,9 +37,12 @@ interface DeckZDao {
     @Query("SELECT * FROM cards WHERE uid = :uid")
     fun card(uid: Int): Flow<Card?>
 
-    /** Toutes les versions d'un leader (normale d'abord, puis les alternatives comme FB09-001*). */
-    @Query("SELECT * FROM cards WHERE number = :number AND type = 'LEADER' ORDER BY variantOf IS NOT NULL, uid")
-    fun leaderVersions(number: String): Flow<List<Card>>
+    /**
+     * Toutes les versions d'un leader : la normale (uid = base) puis ses alternatives, rattachées par variantOf.
+     * Les alternatives ont leur propre numéro (ex. FB09-001_PR, FB09-001_PR2 pour FB09-001).
+     */
+    @Query("SELECT * FROM cards WHERE type = 'LEADER' AND (uid = :baseUid OR variantOf = :baseUid) ORDER BY variantOf IS NOT NULL, uid")
+    fun leaderVersions(baseUid: Int): Flow<List<Card>>
 
     @Query("SELECT * FROM leader_stats WHERE leaderUid = :uid")
     fun stats(uid: Int): Flow<LeaderStats?>
