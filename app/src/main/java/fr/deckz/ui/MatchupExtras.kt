@@ -26,6 +26,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -81,6 +84,10 @@ fun GamesCard(c: AppContainer, me: String, opp: String, deckId: String?, verdict
     val decks by c.user.decks.collectAsStateWithLifecycle()
     val games = all.filter { it.me == me && it.opp == opp }
     val r = Record.of(games)
+    // Qui commence la partie : à choisir avant d'enregistrer (gardé pour les parties suivantes).
+    var first by rememberSaveable { mutableStateOf<Boolean?>(null) }
+    val asFirst = Record.of(games.filter { it.first == true })
+    val asSecond = Record.of(games.filter { it.first == false })
     val accent = Color(0xFF4FC3F7)
 
     Column(Modifier.fillMaxWidth().padding(16.dp, 5.dp).clip(RoundedCornerShape(14.dp)).background(Panel).padding(14.dp)) {
@@ -103,15 +110,31 @@ fun GamesCard(c: AppContainer, me: String, opp: String, deckId: String?, verdict
         compare(r, verdict, mirror)?.let {
             Text(it, style = MaterialTheme.typography.bodySmall, color = Gold, modifier = Modifier.padding(top = 6.dp))
         }
+        if (asFirst.total + asSecond.total > 0) {
+            Spacer(Modifier.height(8.dp))
+            Row {
+                SplitStat("Quand je commence", asFirst, Modifier.weight(1f))
+                Spacer(Modifier.width(8.dp))
+                SplitStat("Quand je suis second", asSecond, Modifier.weight(1f))
+            }
+        }
         Spacer(Modifier.height(10.dp))
+        Text("Qui a commencé ?", style = MaterialTheme.typography.labelMedium, color = Muted)
+        Row(Modifier.padding(vertical = 4.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            val colors = FilterChipDefaults.filterChipColors(selectedContainerColor = accent, selectedLabelColor = Night)
+            FilterChip(selected = first == true, onClick = { first = if (first == true) null else true },
+                label = { Text("Moi (1er)") }, colors = colors)
+            FilterChip(selected = first == false, onClick = { first = if (first == false) null else false },
+                label = { Text("L'adversaire (je suis 2e)") }, colors = colors)
+        }
         Row {
             Button(
-                onClick = { c.user.addGame(me, opp, true, deckId) }, modifier = Modifier.weight(1f),
+                onClick = { c.user.addGame(me, opp, true, deckId, first) }, modifier = Modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = WinGreen, contentColor = Night),
             ) { Text("Victoire", fontWeight = FontWeight.Bold) }
             Spacer(Modifier.width(8.dp))
             Button(
-                onClick = { c.user.addGame(me, opp, false, deckId) }, modifier = Modifier.weight(1f),
+                onClick = { c.user.addGame(me, opp, false, deckId, first) }, modifier = Modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = LossRed, contentColor = Night),
             ) { Text("Défaite", fontWeight = FontWeight.Bold) }
         }
@@ -124,7 +147,8 @@ fun GamesCard(c: AppContainer, me: String, opp: String, deckId: String?, verdict
                     Spacer(Modifier.width(8.dp))
                     val deckName = g.deckId?.let { id -> decks.firstOrNull { it.id == id }?.name }
                     Text(
-                        "${fmtDateTime(g.time)} · ${if (g.win) "Victoire" else "Défaite"}" + (deckName?.let { " · $it" } ?: ""),
+                        "${fmtDateTime(g.time)} · ${if (g.win) "Victoire" else "Défaite"}" +
+                            (when (g.first) { true -> " · 1er"; false -> " · 2e"; null -> "" }) + (deckName?.let { " · $it" } ?: ""),
                         style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f),
                     )
                     IconButton(onClick = { c.user.removeGame(g) }, modifier = Modifier.size(32.dp)) {
@@ -133,6 +157,15 @@ fun GamesCard(c: AppContainer, me: String, opp: String, deckId: String?, verdict
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun SplitStat(label: String, r: Record, modifier: Modifier) {
+    Column(modifier.clip(RoundedCornerShape(10.dp)).background(Night.copy(alpha = 0.5f)).padding(8.dp)) {
+        Text(label, style = MaterialTheme.typography.labelSmall, color = Muted)
+        Text(if (r.total == 0) "—" else r.label, style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.SemiBold,
+            color = when { r.total == 0 -> Muted; r.pct >= 50 -> WinGreen; else -> LossRed })
     }
 }
 

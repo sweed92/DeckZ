@@ -90,6 +90,11 @@ fun MatchupPickerScreen(c: AppContainer, meUid: Int, onBack: () -> Unit, onOppon
     var color by rememberSaveable { mutableStateOf<String?>(null) }
     var rows by remember { mutableStateOf<List<OpponentRow>?>(null) }
     LaunchedEffect(meUid, all) { rows = c.strategy.opponents(meUid, all) }
+    val games by c.user.games.collectAsStateWithLifecycle()
+    // Mon bilan contre chaque adversaire (numéro du leader adverse -> victoires / défaites).
+    val records = remember(games, me?.number) {
+        games.filter { it.me == me?.number }.groupBy { it.opp }.mapValues { Record.of(it.value) }
+    }
 
     val shown = remember(rows, query, color) {
         rows.orEmpty().filter { r ->
@@ -151,7 +156,7 @@ fun MatchupPickerScreen(c: AppContainer, meUid: Int, onBack: () -> Unit, onOppon
                 shown.isEmpty() -> Empty("Aucun adversaire ne correspond")
                 else -> LazyColumn(contentPadding = PaddingValues(12.dp, 8.dp, 12.dp, 32.dp)) {
                     itemsIndexed(shown, key = { _, r -> r.leader.uid }) { i, r ->
-                        OpponentItem(r, Modifier.appear(i)) { onOpponent(r.leader.uid) }
+                        OpponentItem(r, records[r.leader.number], Modifier.appear(i)) { onOpponent(r.leader.uid) }
                     }
                 }
             }
@@ -160,7 +165,7 @@ fun MatchupPickerScreen(c: AppContainer, meUid: Int, onBack: () -> Unit, onOppon
 }
 
 @Composable
-private fun OpponentItem(r: OpponentRow, modifier: Modifier, onClick: () -> Unit) {
+private fun OpponentItem(r: OpponentRow, record: Record?, modifier: Modifier, onClick: () -> Unit) {
     val col = GameColors.of(r.leader.color)
     Row(
         modifier.fillMaxWidth().padding(vertical = 5.dp).clip(RoundedCornerShape(14.dp)).background(Panel)
@@ -185,6 +190,10 @@ private fun OpponentItem(r: OpponentRow, modifier: Modifier, onClick: () -> Unit
                     Text("  ·  ${"%.1f".format(it.share * 100)} % de la méta", style = MaterialTheme.typography.labelSmall, color = Gold)
                 }
             }
+            if (record != null && record.total > 0) Text(
+                "Mon bilan : ${record.label}", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.SemiBold,
+                color = if (record.pct >= 50) WinGreen else LossRed,
+            )
             if (r.hasProfile) Text("Guide détaillé disponible", style = MaterialTheme.typography.labelSmall, color = Orange)
         }
         VerdictPill(r.verdict, mirror = r.mirror)

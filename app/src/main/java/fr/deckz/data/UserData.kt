@@ -18,6 +18,8 @@ data class GameResult(
     val win: Boolean,
     /** Deck perso joué (id de [MyDeck]), si un deck perso était choisi dans le plan de bataille. */
     val deckId: String? = null,
+    /** true = j'ai commencé la partie, false = j'étais second, null = pas précisé (anciennes parties). */
+    val first: Boolean? = null,
 )
 
 /** Deck perso : leader + cartes (numéro -> nombre d'exemplaires, leader exclu). */
@@ -78,8 +80,8 @@ class UserData(context: Context) {
     }
 
     // --- journal de parties ---
-    fun addGame(me: String, opp: String, win: Boolean, deckId: String?) {
-        saveGames(_games.value + GameResult(System.currentTimeMillis(), me, opp, win, deckId))
+    fun addGame(me: String, opp: String, win: Boolean, deckId: String?, first: Boolean?) {
+        saveGames(_games.value + GameResult(System.currentTimeMillis(), me, opp, win, deckId, first))
     }
 
     fun removeGame(g: GameResult) = saveGames(_games.value - g)
