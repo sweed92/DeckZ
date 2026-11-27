@@ -93,10 +93,16 @@ fun MatchupScreen(c: AppContainer, meUid: Int, oppUid: Int, onBack: () -> Unit, 
     var me by remember { mutableStateOf<Side?>(null) }
     var opp by remember { mutableStateOf<Side?>(null) }
     var plan by remember { mutableStateOf<MatchupPlan?>(null) }
+    val allMyDecks by c.user.decks.collectAsStateWithLifecycle()
+    var meNumber by remember { mutableStateOf<String?>(null) }
+    val myDecks = allMyDecks.filter { it.leader == meNumber }
+    var myDeckId by rememberSaveable { mutableStateOf<String?>(null) }
+    val myDeck = myDecks.firstOrNull { it.id == myDeckId }
 
     LaunchedEffect(oppUid) { variants = c.strategy.variants(oppUid) }
-    LaunchedEffect(meUid, oppUid, variantIdx, variants) {
-        val m = c.strategy.side(meUid) ?: return@LaunchedEffect
+    LaunchedEffect(meUid, oppUid, variantIdx, variants, myDeck) {
+        val m = (myDeck?.let { c.strategy.sideFromDeck(meUid, it) } ?: c.strategy.side(meUid)) ?: return@LaunchedEffect
+        meNumber = m.leader.number
         val o = c.strategy.side(oppUid, variants.getOrNull(variantIdx)) ?: return@LaunchedEffect
         me = m; opp = o
         plan = c.strategy.plan(m, o)
@@ -122,6 +128,7 @@ fun MatchupScreen(c: AppContainer, meUid: Int, oppUid: Int, onBack: () -> Unit, 
         LazyColumn(Modifier.padding(pad).fillMaxSize(), contentPadding = PaddingValues(bottom = 40.dp)) {
             item { VersusHeader(m.leader, o.leader, onCard) }
             item { VerdictCard(p) }
+            if (myDecks.isNotEmpty()) item { MyDeckChips(myDecks, myDeck?.id) { myDeckId = it } }
             if (variants.isNotEmpty()) item {
                 VariantChips(variants, variantIdx) { variantIdx = it }
             }
@@ -133,6 +140,7 @@ fun MatchupScreen(c: AppContainer, meUid: Int, oppUid: Int, onBack: () -> Unit, 
             if (p.watch.isNotEmpty()) item { WatchRow(p, onCard) }
             item { Section("🃏", "Mulligan", Color(0xFF3DDC84), p.mulligan) }
             item(key = "player_notes") { PlayerNotesCard(c, m.leader.number, o.leader.number) }
+            item(key = "games") { GamesCard(c, m.leader.number, o.leader.number, myDeck?.id, p.verdict, p.mirror) }
             p.curatedNote?.let { note -> item { Section("📝", "Note d'analyse", Orange, listOf(note), expanded = true) } }
             if (p.community.isNotEmpty()) item { CommunityCard(p) }
             item { GlossaryCard() }
@@ -254,7 +262,7 @@ private fun Bullet(text: String, accent: Color = Orange, small: Boolean = false)
 @Composable
 private fun PlayerNotesCard(c: AppContainer, meNumber: String, oppNumber: String) {
     val accent = Color(0xFFB388FF)
-    val saved = remember(meNumber, oppNumber) { c.notes.get(meNumber, oppNumber) }
+    val saved = remember(meNumber, oppNumber) { c.user.note(meNumber, oppNumber) }
     var text by rememberSaveable(meNumber, oppNumber) { mutableStateOf(saved) }
     var open by rememberSaveable("player_notes") { mutableStateOf(saved.isNotBlank()) }
     val rot by animateFloatAsState(if (open) 180f else 0f, label = "chevron")
@@ -262,12 +270,12 @@ private fun PlayerNotesCard(c: AppContainer, meNumber: String, oppNumber: String
     // Sauvegarde automatique, une demi-seconde après la dernière frappe.
     LaunchedEffect(meNumber, oppNumber, text) {
         delay(500)
-        c.notes.set(meNumber, oppNumber, text)
+        c.user.setNote(meNumber, oppNumber, text)
     }
     // Et à la sortie de l'écran, pour ne rien perdre si on quitte juste après avoir tapé.
     val latest by rememberUpdatedState(text)
     DisposableEffect(meNumber, oppNumber) {
-        onDispose { c.notes.set(meNumber, oppNumber, latest) }
+        onDispose { c.user.setNote(meNumber, oppNumber, latest) }
     }
 
     Column(

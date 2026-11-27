@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
@@ -61,7 +63,7 @@ fun SettingsScreen(c: AppContainer, onBack: () -> Unit) {
             )
         },
     ) { pad ->
-        Column(Modifier.padding(pad).fillMaxSize().padding(16.dp)) {
+        Column(Modifier.padding(pad).fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp)) {
             Column(Modifier.fillMaxWidth().clip(RoundedCornerShape(14.dp)).background(Panel).padding(16.dp)) {
                 Text("Dernière mise à jour", color = Muted, style = MaterialTheme.typography.labelMedium)
                 Text(if (s.lastSuccess > 0) fmtDateTime(s.lastSuccess) else "Jamais", style = MaterialTheme.typography.titleMedium)
@@ -86,6 +88,8 @@ fun SettingsScreen(c: AppContainer, onBack: () -> Unit) {
             OutlinedButton(onClick = { confirm = true }, enabled = !s.running, modifier = Modifier.fillMaxWidth()) {
                 Icon(Icons.Default.Delete, null); Text("  Vider le cache")
             }
+            Spacer(Modifier.height(16.dp))
+            BackupCard(c)
             Spacer(Modifier.height(24.dp))
             Text(
                 "Sources : DeckPlanet (méta, decks, base de cartes), db-fusionworld.com (deck profiles). Application personnelle non officielle, " +

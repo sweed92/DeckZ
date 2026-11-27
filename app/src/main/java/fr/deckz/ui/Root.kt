@@ -58,14 +58,16 @@ fun DeckZRoot(c: AppContainer) {
         popExitTransition = { slideOutHorizontally { it / 4 } + fadeOut() },
     ) {
         composable("leaders") {
-            LeaderListScreen(c, onLeader = { nav.navigate("leader/$it") }, onSettings = { nav.navigate("settings") })
+            LeaderListScreen(c, onLeader = { nav.navigate("leader/$it") }, onSettings = { nav.navigate("settings") },
+                onNotebook = { nav.navigate("notebook") }, onMyDecks = { nav.navigate("mydecks") })
         }
         composable("leader/{uid}", listOf(navArgument("uid") { type = NavType.IntType })) { e ->
             LeaderScreen(c, e.arguments!!.getInt("uid"), onBack = { nav.popBackStack() },
                 onCard = { nav.navigate("card/$it") }, onDeck = { nav.navigate("deck/$it") }, onMatchups = { nav.navigate("matchups/$it") })
         }
         composable("deck/{id}", listOf(navArgument("id") { type = NavType.StringType })) { e ->
-            DeckScreen(c, e.arguments!!.getString("id")!!, onBack = { nav.popBackStack() }, onCard = { nav.navigate("card/$it") })
+            DeckScreen(c, e.arguments!!.getString("id")!!, onBack = { nav.popBackStack() }, onCard = { nav.navigate("card/$it") },
+                onMyDeck = { nav.navigate("mydeck/$it") })
         }
         composable("card/{uid}", listOf(navArgument("uid") { type = NavType.IntType })) { e ->
             CardScreen(c, e.arguments!!.getInt("uid"), onBack = { nav.popBackStack() })
@@ -82,6 +84,13 @@ fun DeckZRoot(c: AppContainer) {
                 onCard = { nav.navigate("card/$it") })
         }
         composable("settings") { SettingsScreen(c, onBack = { nav.popBackStack() }) }
+        composable("notebook") {
+            NotebookScreen(c, onBack = { nav.popBackStack() }, onMatchup = { me, opp -> nav.navigate("matchup/$me/$opp") })
+        }
+        composable("mydecks") { MyDecksScreen(c, onBack = { nav.popBackStack() }, onOpen = { nav.navigate("mydeck/$it") }) }
+        composable("mydeck/{id}", listOf(navArgument("id") { type = NavType.StringType })) { e ->
+            MyDeckEditorScreen(c, e.arguments!!.getString("id")!!, onBack = { nav.popBackStack() }, onCard = { nav.navigate("card/$it") })
+        }
     }
 }
 

@@ -22,6 +22,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -80,6 +82,7 @@ fun LeaderScreen(
     val listed by repo.leaderDeckCards(uid).collectAsStateWithLifecycle(emptyList())
     val sync by repo.state.collectAsStateWithLifecycle()
     var tab by rememberSaveable { mutableIntStateOf(0) }
+    val favs by c.user.favorites.collectAsStateWithLifecycle()
 
     Scaffold(
         containerColor = Night,
@@ -87,6 +90,18 @@ fun LeaderScreen(
             TopAppBar(
                 title = { Text(card?.name ?: "", maxLines = 1, overflow = TextOverflow.Ellipsis) },
                 navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Retour") } },
+                actions = {
+                    card?.let { l ->
+                        val fav = l.number in favs
+                        IconButton(onClick = { c.user.toggleFavorite(l.number) }) {
+                            Icon(
+                                if (fav) Icons.Filled.Star else Icons.Outlined.Star,
+                                if (fav) "Retirer des favoris" else "Ajouter aux favoris",
+                                tint = if (fav) Gold else Muted,
+                            )
+                        }
+                    }
+                },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = Night),
             )
         },

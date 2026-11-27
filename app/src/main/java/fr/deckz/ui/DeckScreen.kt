@@ -59,7 +59,7 @@ import kotlinx.coroutines.launch
 @Suppress("DEPRECATION")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DeckScreen(c: AppContainer, id: String, onBack: () -> Unit, onCard: (Int) -> Unit) {
+fun DeckScreen(c: AppContainer, id: String, onBack: () -> Unit, onCard: (Int) -> Unit, onMyDeck: (String) -> Unit = {}) {
     val deck by c.repository.deck(id).collectAsStateWithLifecycle(null)
     val cards by c.repository.deckCards(id).collectAsStateWithLifecycle(emptyList())
     var loading by remember { mutableStateOf(true) }
@@ -81,6 +81,19 @@ fun DeckScreen(c: AppContainer, id: String, onBack: () -> Unit, onCard: (Int) ->
             TopAppBar(
                 title = { Text(deck?.event ?: "Deck", maxLines = 1, overflow = TextOverflow.Ellipsis) },
                 navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Retour") } },
+                actions = {
+                    // Copie ce deck gagnant dans « Mes decks » pour l'adapter.
+                    val l = leader.firstOrNull()?.card
+                    if (main.isNotEmpty() && l != null) androidx.compose.material3.TextButton(onClick = {
+                        val copy = fr.deckz.data.MyDeck(
+                            name = deck?.name?.takeIf { it.isNotBlank() } ?: "Deck ${l.name}",
+                            leader = l.number,
+                            cards = main.groupBy { it.card.number }.mapValues { (_, r) -> r.sumOf { it.qty }.coerceAtMost(MAX_COPIES) },
+                        )
+                        c.user.saveDeck(copy)
+                        onMyDeck(copy.id)
+                    }) { Text("+ Mes decks", color = Orange, fontWeight = FontWeight.Bold) }
+                },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = Night),
             )
         },

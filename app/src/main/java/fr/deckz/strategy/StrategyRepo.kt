@@ -40,6 +40,26 @@ class StrategyRepo(context: Context, db: AppDb) {
         Side(card, book.profile(card.number), stats, cards, variant?.let { "${it.name} (${it.deckCount} decks)" })
     }
 
+    /** Camp construit à partir d'un deck perso (exemplaires réels, pas de moyenne). */
+    suspend fun sideFromDeck(uid: Int, deck: fr.deckz.data.MyDeck): Side? = withContext(Dispatchers.Default) {
+        val card = dao.cardNow(uid) ?: return@withContext null
+        val stats = dao.leadersNow().firstOrNull { it.card.uid == uid }?.stats
+        val byNumber = dao.cardsByNumbers(deck.cards.keys.toList()).groupBy { it.number }.mapValues { it.value.first() }
+        val cards = deck.cards.mapNotNull { (n, q) -> byNumber[n]?.let { WeightedCard(it, q.toDouble(), 1.0) } }
+            .sortedByDescending { it.weight }
+        Side(card, book.profile(card.number), stats, cards, "Mon deck : ${deck.name}")
+    }
+
+    suspend fun cardsByNumbers(numbers: List<String>): Map<String, Card> = withContext(Dispatchers.Default) {
+        if (numbers.isEmpty()) emptyMap() else dao.cardsByNumbers(numbers).groupBy { it.number }.mapValues { it.value.first() }
+    }
+
+    suspend fun searchCards(q: String): List<Card> = withContext(Dispatchers.Default) { dao.searchCards(q.trim()) }
+
+    suspend fun leaderByNumber(number: String): Card? = withContext(Dispatchers.Default) {
+        dao.uidByNumber(number)?.let { dao.cardNow(it) }
+    }
+
     suspend fun variants(uid: Int): List<Variant> = withContext(Dispatchers.Default) {
         val card = dao.cardNow(uid) ?: return@withContext emptyList()
         Variants.of(dao.leaderDeckListsNow(uid), card.number)

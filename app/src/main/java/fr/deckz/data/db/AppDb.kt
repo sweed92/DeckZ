@@ -73,6 +73,18 @@ interface DeckZDao {
     @Query("SELECT uid FROM cards WHERE number = :number ORDER BY variantOf IS NOT NULL LIMIT 1")
     suspend fun uidByNumber(number: String): Int?
 
+    /** Cartes par numéro officiel (versions de base en premier, puis variantes). */
+    @Query("SELECT * FROM cards WHERE number IN (:numbers) ORDER BY variantOf IS NOT NULL")
+    suspend fun cardsByNumbers(numbers: List<String>): List<Card>
+
+    /** Recherche de cartes (hors leaders et variantes d'illustration) pour l'éditeur de decks perso. */
+    @Query(
+        """SELECT * FROM cards WHERE type != 'LEADER' AND variantOf IS NULL
+           AND (name LIKE '%' || :q || '%' OR number LIKE '%' || :q || '%' OR traits LIKE '%' || :q || '%')
+           ORDER BY cost IS NULL, cost, number LIMIT 300"""
+    )
+    suspend fun searchCards(q: String): List<Card>
+
     @Query("SELECT * FROM decks WHERE hasList = 0 ORDER BY date IS NULL, date DESC, placement LIMIT :n")
     suspend fun decksWithoutList(n: Int): List<Deck>
 

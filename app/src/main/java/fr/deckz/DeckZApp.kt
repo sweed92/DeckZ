@@ -26,7 +26,7 @@ class AppContainer(context: Context) {
     val scraper = Scraper()
     val repository = Repository(context, db, scraper)
     val strategy = fr.deckz.strategy.StrategyRepo(context, db)
-    val notes = fr.deckz.data.NotesStore(context)
+    val user = fr.deckz.data.UserData(context)
     val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 }
 
