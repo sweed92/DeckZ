@@ -169,7 +169,7 @@ private fun VersionsRow(versions: List<Card>, selectedUid: Int, onSelect: (Card)
                 val sel = v.uid == selectedUid
                 Column(Modifier.width(84.dp).clickable { onSelect(v) }, horizontalAlignment = Alignment.CenterHorizontally) {
                     CardImage(
-                        v.imageUrl,
+                        v.backImageUrl ?: v.imageUrl,
                         Modifier.fillMaxWidth().aspectRatio(63f / 88f)
                             .border(if (sel) 3.dp else 1.dp, if (sel) Orange else Muted.copy(alpha = 0.4f), RoundedCornerShape(8.dp)),
                         corner = 8.dp, contentDescription = v.name,
@@ -188,11 +188,12 @@ private fun VersionsRow(versions: List<Card>, selectedUid: Int, onSelect: (Card)
 
 @Composable
 private fun LeaderHeader(card: Card, stats: LeaderStats?) {
-    var flipped by remember { mutableStateOf(false) }
+    val front = card.frontArt()
+    val back = card.backArt()
+    // Le leader s'affiche d'abord sur sa face éveillée ; un toucher le retourne.
+    var flipped by remember(card.uid) { mutableStateOf(back != null) }
     val rot by animateFloatAsState(if (flipped) 180f else 0f, tween(600, easing = FastOutSlowInEasing), label = "flip")
     val col = GameColors.of(card.color)
-    val front = card.art()
-    val back = card.backArt()
     val showBack = rot > 90f && back != null
     Column(
         Modifier.fillMaxWidth().background(Brush.verticalGradient(listOf(col.copy(alpha = 0.28f), Night))).padding(16.dp),
@@ -210,7 +211,7 @@ private fun LeaderHeader(card: Card, stats: LeaderStats?) {
             )
         }
         if (back != null) {
-            Text(if (flipped) "Éveillé — touchez pour retourner" else "Touchez pour voir la face éveillée",
+            Text(if (flipped) "Face éveillée — touchez pour voir la face normale" else "Face normale — touchez pour voir la face éveillée",
                 style = MaterialTheme.typography.labelSmall, color = Muted, modifier = Modifier.padding(top = 8.dp))
         }
         Spacer(Modifier.height(12.dp))
