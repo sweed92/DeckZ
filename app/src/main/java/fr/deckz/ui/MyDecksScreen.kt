@@ -123,7 +123,7 @@ fun MyDecksScreen(c: AppContainer, onBack: () -> Unit, onOpen: (String) -> Unit)
                         .clickable { onOpen(d.id) }.padding(10.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    CardImage(leader?.imageUrl, Modifier.width(48.dp).aspectRatio(63f / 88f), corner = 6.dp)
+                    CardImage(leader?.art(), Modifier.width(48.dp).aspectRatio(63f / 88f), corner = 6.dp)
                     Spacer(Modifier.width(12.dp))
                     Column(Modifier.weight(1f)) {
                         Text(d.name, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
@@ -168,7 +168,7 @@ private fun LeaderPickerDialog(leaders: List<Card>, favs: Set<String>, onDismiss
                             Modifier.fillMaxWidth().clip(RoundedCornerShape(10.dp)).clickable { onPick(l) }.padding(6.dp),
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
-                            CardImage(l.imageUrl, Modifier.width(36.dp).aspectRatio(63f / 88f), corner = 4.dp)
+                            CardImage(l.art(), Modifier.width(36.dp).aspectRatio(63f / 88f), corner = 4.dp)
                             Spacer(Modifier.width(10.dp))
                             Column(Modifier.weight(1f)) {
                                 Text((if (l.number in favs) "★ " else "") + l.name, style = MaterialTheme.typography.titleSmall,
@@ -257,7 +257,7 @@ fun MyDeckEditorScreen(c: AppContainer, id: String, onBack: () -> Unit, onCard: 
         LazyColumn(Modifier.padding(pad).fillMaxSize(), contentPadding = PaddingValues(16.dp, 4.dp, 16.dp, 40.dp)) {
             item {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    CardImage(leader?.imageUrl, Modifier.width(64.dp).aspectRatio(63f / 88f).clickable { leader?.let { onCard(it.uid) } }, corner = 8.dp)
+                    CardImage(leader?.art(), Modifier.width(64.dp).aspectRatio(63f / 88f).clickable { leader?.let { onCard(it.uid) } }, corner = 8.dp)
                     Spacer(Modifier.width(12.dp))
                     Column(Modifier.weight(1f)) {
                         OutlinedTextField(name, { name = it }, singleLine = true, label = { Text("Nom du deck") },

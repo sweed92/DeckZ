@@ -173,7 +173,7 @@ private fun OpponentItem(r: OpponentRow, record: Record?, modifier: Modifier, on
             .clickable(onClick = onClick).padding(8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        CardImage(r.leader.imageUrl, Modifier.width(54.dp).aspectRatio(63f / 88f), corner = 6.dp)
+        CardImage(r.leader.art(), Modifier.width(54.dp).aspectRatio(63f / 88f), corner = 6.dp)
         Spacer(Modifier.width(12.dp))
         Column(Modifier.weight(1f)) {
             Row(verticalAlignment = Alignment.CenterVertically) {

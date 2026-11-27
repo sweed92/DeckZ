@@ -138,9 +138,9 @@ private fun EntryRow(e: NotebookEntry, me: Card?, opp: Card?, modifier: Modifier
             .clickable(enabled = me != null && opp != null, onClick = onClick).padding(10.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            CardImage(me?.imageUrl, Modifier.width(42.dp).aspectRatio(63f / 88f), corner = 6.dp)
+            CardImage(me?.art(), Modifier.width(42.dp).aspectRatio(63f / 88f), corner = 6.dp)
             Text("VS", fontFamily = Bangers, color = Gold, modifier = Modifier.padding(horizontal = 6.dp))
-            CardImage(opp?.imageUrl, Modifier.width(42.dp).aspectRatio(63f / 88f), corner = 6.dp)
+            CardImage(opp?.art(), Modifier.width(42.dp).aspectRatio(63f / 88f), corner = 6.dp)
             Spacer(Modifier.width(10.dp))
             Column(Modifier.weight(1f)) {
                 Text(me?.name ?: e.me, style = MaterialTheme.typography.titleSmall, maxLines = 1, overflow = TextOverflow.Ellipsis)

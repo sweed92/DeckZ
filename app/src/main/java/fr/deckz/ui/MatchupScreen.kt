@@ -177,7 +177,7 @@ private fun Fighter(card: Card, label: String, col: Color, modifier: Modifier, t
             Modifier.fillMaxWidth(0.9f).aspectRatio(63f / 88f).rotate(tilt)
                 .shadow(14.dp, RoundedCornerShape(12.dp), ambientColor = col, spotColor = col)
                 .clickable(onClick = onClick)
-        ) { CardImage(card.imageUrl, Modifier.fillMaxSize(), corner = 12.dp, contentDescription = card.name) }
+        ) { CardImage(card.art(), Modifier.fillMaxSize(), corner = 12.dp, contentDescription = card.name) }
         Spacer(Modifier.height(8.dp))
         Text(card.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold, maxLines = 1,
             overflow = TextOverflow.Ellipsis, textAlign = TextAlign.Center)

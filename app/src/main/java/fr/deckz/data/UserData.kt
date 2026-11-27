@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.builtins.MapSerializer
+import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
 import java.util.UUID
 
@@ -34,6 +36,10 @@ data class MyDeck(
     val size get() = cards.values.sum()
 }
 
+/** Illustration choisie pour un leader (version normale ou alternative, ex. FB09-001*). */
+@Serializable
+data class LeaderArt(val uid: Int, val imageUrl: String, val backImageUrl: String? = null)
+
 /** Tout ce qui est exporté / importé. */
 @Serializable
 data class UserBackup(
@@ -44,6 +50,8 @@ data class UserBackup(
     val games: List<GameResult> = emptyList(),
     val decks: List<MyDeck> = emptyList(),
     val favorites: Set<String> = emptySet(),
+    /** Numéro du leader -> illustration choisie. */
+    val art: Map<String, LeaderArt> = emptyMap(),
 )
 
 /**
@@ -62,12 +70,15 @@ class UserData(context: Context) {
     private val _games = MutableStateFlow(read(K_GAMES, ListSerializer(GameResult.serializer())).orEmpty())
     private val _decks = MutableStateFlow(read(K_DECKS, ListSerializer(MyDeck.serializer())).orEmpty())
     private val _favorites = MutableStateFlow(prefs.getStringSet(K_FAVORITES, emptySet())!!.toSet())
+    private val _art = MutableStateFlow(read(K_ART, MapSerializer(String.serializer(), LeaderArt.serializer())).orEmpty())
 
     /** Notes par affrontement, clé « monLeader|sonLeader ». */
     val notes: StateFlow<Map<String, String>> = _notes.asStateFlow()
     val games: StateFlow<List<GameResult>> = _games.asStateFlow()
     val decks: StateFlow<List<MyDeck>> = _decks.asStateFlow()
     val favorites: StateFlow<Set<String>> = _favorites.asStateFlow()
+    /** Illustration choisie par leader (numéro de carte). Absent = version normale. */
+    val art: StateFlow<Map<String, LeaderArt>> = _art.asStateFlow()
 
     // --- notes ---
     fun note(me: String, opp: String): String = _notes.value[key(me, opp)].orEmpty()
@@ -114,10 +125,20 @@ class UserData(context: Context) {
         prefs.edit().putStringSet(K_FAVORITES, now).apply()
     }
 
+    // --- illustrations ---
+    /** Choisit l'illustration d'un leader ; null = revenir à la version normale. */
+    fun setArt(leaderNumber: String, art: LeaderArt?) = saveArt(if (art == null) _art.value - leaderNumber else _art.value + (leaderNumber to art))
+
+    private fun saveArt(map: Map<String, LeaderArt>) {
+        if (map == _art.value) return
+        _art.value = map
+        write(K_ART, MapSerializer(String.serializer(), LeaderArt.serializer()), map)
+    }
+
     // --- sauvegarde ---
     fun exportJson(): String = json.encodeToString(
         UserBackup.serializer(),
-        UserBackup(notes = _notes.value, games = _games.value, decks = _decks.value, favorites = _favorites.value),
+        UserBackup(notes = _notes.value, games = _games.value, decks = _decks.value, favorites = _favorites.value, art = _art.value),
     )
 
     /** Lit une sauvegarde (lève une exception si le fichier n'en est pas une) sans rien modifier. */
@@ -133,6 +154,7 @@ class UserData(context: Context) {
         saveDecks(b.decks)
         _favorites.value = b.favorites
         prefs.edit().putStringSet(K_FAVORITES, b.favorites).apply()
+        saveArt(b.art)
     }
 
     private fun readNotes(): Map<String, String> =
@@ -149,6 +171,7 @@ class UserData(context: Context) {
         private const val K_GAMES = "games"
         private const val K_DECKS = "decks"
         private const val K_FAVORITES = "favorites"
+        private const val K_ART = "art"
 
         fun key(me: String, opp: String) = "$me|$opp"
         fun splitKey(k: String): Pair<String, String>? = k.split('|').takeIf { it.size == 2 }?.let { it[0] to it[1] }

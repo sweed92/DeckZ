@@ -166,7 +166,7 @@ private fun LeaderTile(r: LeaderRow, favorite: Boolean, modifier: Modifier, onCl
             .clickable(onClick = onClick)
     ) {
         Box {
-            CardImage(r.card.imageUrl, Modifier.fillMaxWidth().aspectRatio(63f / 88f), corner = 0.dp, contentDescription = r.card.name)
+            CardImage(r.card.art(), Modifier.fillMaxWidth().aspectRatio(63f / 88f), corner = 0.dp, contentDescription = r.card.name)
             TierBadge(r.stats?.tier, Modifier.align(Alignment.TopStart).padding(6.dp))
             if (favorite) Text(
                 "★", Modifier.align(Alignment.BottomEnd).padding(6.dp).clip(CircleShape).background(Night.copy(alpha = 0.75f))

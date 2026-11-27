@@ -1,5 +1,10 @@
 package fr.deckz.ui
 
+import fr.deckz.data.LeaderArt
+import kotlinx.coroutines.flow.flowOf
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.border
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -83,6 +88,17 @@ fun LeaderScreen(
     val sync by repo.state.collectAsStateWithLifecycle()
     var tab by rememberSaveable { mutableIntStateOf(0) }
     val favs by c.user.favorites.collectAsStateWithLifecycle()
+    val art by c.user.art.collectAsStateWithLifecycle()
+    val versions by remember(card?.number) { card?.number?.let { repo.leaderVersions(it) } ?: flowOf(emptyList()) }
+        .collectAsStateWithLifecycle(emptyList())
+    // Garde à jour les adresses d'images de l'illustration choisie (au cas où la source les change).
+    LaunchedEffect(versions, art) {
+        val number = card?.number ?: return@LaunchedEffect
+        val chosen = art[number] ?: return@LaunchedEffect
+        versions.firstOrNull { it.uid == chosen.uid }?.let { v ->
+            if (v.imageUrl != chosen.imageUrl || v.backImageUrl != chosen.backImageUrl) c.user.setArt(number, LeaderArt(v.uid, v.imageUrl, v.backImageUrl))
+        }
+    }
 
     Scaffold(
         containerColor = Night,
@@ -110,6 +126,11 @@ fun LeaderScreen(
         LazyColumn(Modifier.padding(pad).fillMaxSize(), contentPadding = PaddingValues(bottom = 32.dp)) {
             item { StaleBanner(sync.lastSuccess, sync.lastFailed && !sync.running) }
             item { LeaderHeader(leader, stats) }
+            if (versions.size > 1) item {
+                VersionsRow(versions, selectedUid = art[leader.number]?.uid ?: versions.first().uid) { v ->
+                    c.user.setArt(leader.number, if (v.variantOf == null) null else LeaderArt(v.uid, v.imageUrl, v.backImageUrl))
+                }
+            }
             item { BattlePlanButton { onMatchups(uid) } }
             item {
                 PrimaryTabRow(
@@ -134,12 +155,43 @@ fun LeaderScreen(
     }
 }
 
+/** Rangée « Versions » : normale + alternatives ; la version touchée devient l'illustration du leader partout. */
+@Composable
+private fun VersionsRow(versions: List<Card>, selectedUid: Int, onSelect: (Card) -> Unit) {
+    Column(Modifier.fillMaxWidth().padding(top = 4.dp, bottom = 8.dp)) {
+        Text("Versions", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(horizontal = 16.dp))
+        Text("Touche une illustration pour l'utiliser dans toute l'appli", style = MaterialTheme.typography.labelSmall,
+            color = Muted, modifier = Modifier.padding(horizontal = 16.dp))
+        Spacer(Modifier.height(8.dp))
+        LazyRow(contentPadding = PaddingValues(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            itemsIndexed(versions, key = { _, v -> v.uid }) { i, v ->
+                val sel = v.uid == selectedUid
+                Column(Modifier.width(84.dp).clickable { onSelect(v) }, horizontalAlignment = Alignment.CenterHorizontally) {
+                    CardImage(
+                        v.imageUrl,
+                        Modifier.fillMaxWidth().aspectRatio(63f / 88f)
+                            .border(if (sel) 3.dp else 1.dp, if (sel) Orange else Muted.copy(alpha = 0.4f), RoundedCornerShape(8.dp)),
+                        corner = 8.dp, contentDescription = v.name,
+                    )
+                    Text(
+                        if (i == 0) "Normale" else if (versions.size == 2) "Alternative" else "Alternative $i",
+                        style = MaterialTheme.typography.labelSmall, color = if (sel) Orange else Muted,
+                        fontWeight = if (sel) FontWeight.Bold else FontWeight.Normal, modifier = Modifier.padding(top = 4.dp),
+                    )
+                }
+            }
+        }
+    }
+}
+
 @Composable
 private fun LeaderHeader(card: Card, stats: LeaderStats?) {
     var flipped by remember { mutableStateOf(false) }
     val rot by animateFloatAsState(if (flipped) 180f else 0f, tween(600, easing = FastOutSlowInEasing), label = "flip")
     val col = GameColors.of(card.color)
-    val showBack = rot > 90f && card.backImageUrl != null
+    val front = card.art()
+    val back = card.backArt()
+    val showBack = rot > 90f && back != null
     Column(
         Modifier.fillMaxWidth().background(Brush.verticalGradient(listOf(col.copy(alpha = 0.28f), Night))).padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -148,14 +200,14 @@ private fun LeaderHeader(card: Card, stats: LeaderStats?) {
             Modifier.width(220.dp).aspectRatio(63f / 88f)
                 .graphicsLayer { rotationY = rot; cameraDistance = 14f * density }
                 .shadow(18.dp, RoundedCornerShape(14.dp), ambientColor = col, spotColor = col)
-                .clickable(enabled = card.backImageUrl != null) { flipped = !flipped }
+                .clickable(enabled = back != null) { flipped = !flipped }
         ) {
             CardImage(
-                if (showBack) card.backImageUrl else card.imageUrl,
+                if (showBack) back else front,
                 Modifier.fillMaxSize().graphicsLayer { if (showBack) rotationY = 180f }, corner = 14.dp, contentDescription = card.name,
             )
         }
-        if (card.backImageUrl != null) {
+        if (back != null) {
             Text(if (flipped) "Éveillé — touchez pour retourner" else "Touchez pour voir la face éveillée",
                 style = MaterialTheme.typography.labelSmall, color = Muted, modifier = Modifier.padding(top = 8.dp))
         }

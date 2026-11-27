@@ -19,6 +19,7 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -50,6 +51,8 @@ fun DeckZRoot(c: AppContainer) {
         return
     }
     val nav = rememberNavController()
+    val art by c.user.art.collectAsStateWithLifecycle()
+    CompositionLocalProvider(LocalLeaderArt provides art) {
     NavHost(
         nav, startDestination = "leaders", modifier = Modifier.fillMaxSize().background(Night),
         enterTransition = { slideInHorizontally { it / 4 } + fadeIn() },
@@ -91,6 +94,7 @@ fun DeckZRoot(c: AppContainer) {
         composable("mydeck/{id}", listOf(navArgument("id") { type = NavType.StringType })) { e ->
             MyDeckEditorScreen(c, e.arguments!!.getString("id")!!, onBack = { nav.popBackStack() }, onCard = { nav.navigate("card/$it") })
         }
+    }
     }
 }
 
