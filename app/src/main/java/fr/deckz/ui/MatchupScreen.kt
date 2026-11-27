@@ -229,9 +229,9 @@ private fun Section(icon: String, title: String, accent: Color, lines: List<Stri
     val rot by animateFloatAsState(if (open) 180f else 0f, label = "chevron")
     Column(
         Modifier.fillMaxWidth().padding(16.dp, 5.dp).clip(RoundedCornerShape(14.dp)).background(Panel)
-            .border(1.dp, accent.copy(alpha = 0.45f), RoundedCornerShape(14.dp))
+            .animateContentSize()
     ) {
-        Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(Modifier.fillMaxWidth().clickable { open = !open }.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
             Box(Modifier.size(34.dp).clip(RoundedCornerShape(10.dp)).background(accent.copy(alpha = 0.18f)), contentAlignment = Alignment.Center) {
                 Text(icon, fontSize = 17.sp)
             }
@@ -278,9 +278,9 @@ private fun PlayerNotesCard(c: AppContainer, meNumber: String, oppNumber: String
 
     Column(
         Modifier.fillMaxWidth().padding(16.dp, 5.dp).clip(RoundedCornerShape(14.dp)).background(Panel)
-            .animateContentSize()
+            .border(1.dp, accent.copy(alpha = 0.45f), RoundedCornerShape(14.dp))
     ) {
-        Row(Modifier.fillMaxWidth().clickable { open = !open }.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(Modifier.fillMaxWidth().padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
             Box(Modifier.size(34.dp).clip(RoundedCornerShape(10.dp)).background(accent.copy(alpha = 0.18f)), contentAlignment = Alignment.Center) {
                 Text("🧠", fontSize = 17.sp)
             }
@@ -290,8 +290,7 @@ private fun PlayerNotesCard(c: AppContainer, meNumber: String, oppNumber: String
                 Text("Mes notes sur cet affrontement", style = MaterialTheme.typography.labelSmall, color = Muted)
             }
         }
-        run {
-            Column(Modifier.padding(start = 14.dp, end = 14.dp, bottom = 14.dp)) {
+        Column(Modifier.padding(start = 14.dp, end = 14.dp, bottom = 14.dp)) {
                 Box(Modifier.fillMaxWidth().height(1.dp).background(accent.copy(alpha = 0.25f)))
                 Spacer(Modifier.height(8.dp))
                 OutlinedTextField(
@@ -310,7 +309,6 @@ private fun PlayerNotesCard(c: AppContainer, meNumber: String, oppNumber: String
                 Spacer(Modifier.height(4.dp))
                 Text("Enregistré automatiquement sur ce téléphone, pour ce matchup uniquement.",
                     style = MaterialTheme.typography.labelSmall, color = Muted)
-            }
         }
     }
 }
