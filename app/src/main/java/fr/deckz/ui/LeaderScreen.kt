@@ -41,6 +41,9 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -78,6 +81,7 @@ import fr.deckz.ui.theme.tierColor
 @Composable
 fun LeaderScreen(
     c: AppContainer, uid: Int, onBack: () -> Unit, onCard: (Int) -> Unit, onDeck: (String) -> Unit, onMatchups: (Int) -> Unit,
+    onCompare: (String) -> Unit = {},
 ) {
     val repo = c.repository
     val card by repo.card(uid).collectAsStateWithLifecycle(null)
@@ -88,6 +92,8 @@ fun LeaderScreen(
     val sync by repo.state.collectAsStateWithLifecycle()
     var tab by rememberSaveable { mutableIntStateOf(0) }
     val favs by c.user.favorites.collectAsStateWithLifecycle()
+    val allMyDecks by c.user.decks.collectAsStateWithLifecycle()
+    var pickCompare by remember { mutableStateOf(false) }
     val art by c.user.art.collectAsStateWithLifecycle()
     val baseUid = card?.let { it.variantOf ?: it.uid }
     val versions by remember(baseUid) { baseUid?.let { repo.leaderVersions(it) } ?: flowOf(emptyList()) }
@@ -145,6 +151,17 @@ fun LeaderScreen(
                     }
                 }
             }
+            // Onglet Decks gagnants : comparer mes decks de ce leader à la méta.
+            val mine = allMyDecks.filter { it.leader.substringBefore('_') == leader.artKey }
+            if (tab == 1 && mine.isNotEmpty()) item(key = "compare") {
+                OutlinedButton(
+                    onClick = { if (mine.size == 1) onCompare(mine.first().id) else pickCompare = true },
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 6.dp),
+                ) {
+                    Text(if (mine.size == 1) "Comparer « ${mine.first().name} » à la méta" else "Comparer un de mes decks à la méta",
+                        maxLines = 1, overflow = TextOverflow.Ellipsis)
+                }
+            }
             when (tab) {
                 0 -> if (usage.isEmpty()) item { Empty("Pas encore de données d'usage pour ce leader") }
                 else itemsIndexed(usage, key = { _, u -> "u" + u.card.uid }) { i, u -> UsageItem(u, Modifier.appear(i)) { onCard(u.card.uid) } }
@@ -153,6 +170,26 @@ fun LeaderScreen(
                 else -> item { CurveTab(usage, listed, decks.count { it.hasList }) }
             }
         }
+    }
+
+    if (pickCompare) {
+        val mine = allMyDecks.filter { d -> card?.let { d.leader.substringBefore('_') == it.artKey } == true }
+        AlertDialog(
+            onDismissRequest = { pickCompare = false },
+            title = { Text("Quel deck comparer ?") },
+            text = {
+                Column {
+                    mine.forEach { d ->
+                        Text(
+                            "${d.name} · ${d.size} cartes", style = MaterialTheme.typography.bodyLarge,
+                            modifier = Modifier.fillMaxWidth().clickable { pickCompare = false; onCompare(d.id) }.padding(vertical = 12.dp),
+                        )
+                    }
+                }
+            },
+            confirmButton = {},
+            dismissButton = { TextButton(onClick = { pickCompare = false }) { Text("Annuler") } },
+        )
     }
 }
 

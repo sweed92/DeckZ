@@ -189,7 +189,7 @@ private fun LeaderPickerDialog(leaders: List<Card>, favs: Set<String>, onDismiss
 @Suppress("DEPRECATION")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyDeckEditorScreen(c: AppContainer, id: String, onBack: () -> Unit, onCard: (Int) -> Unit) {
+fun MyDeckEditorScreen(c: AppContainer, id: String, onBack: () -> Unit, onCard: (Int) -> Unit, onCompare: (String) -> Unit = {}) {
     val decks by c.user.decks.collectAsStateWithLifecycle()
     val deck = decks.firstOrNull { it.id == id }
     var leader by remember { mutableStateOf<Card?>(null) }
@@ -274,6 +274,9 @@ fun MyDeckEditorScreen(c: AppContainer, id: String, onBack: () -> Unit, onCard: 
                     },
                     color = if (size == DECK_SIZE) WinGreen else Gold, fontWeight = FontWeight.SemiBold,
                 )
+                OutlinedButton(onClick = { onCompare(deck.id) }, modifier = Modifier.fillMaxWidth().padding(top = 8.dp)) {
+                    Text("Comparer à la méta")
+                }
                 if (rows.isNotEmpty()) {
                     val b = DoubleArray(8).also { arr -> rows.forEach { (_, q, card) -> arr[costBucket(card?.cost)] += q.toDouble() } }
                     CostCurve(b.toList(), height = 90.dp)

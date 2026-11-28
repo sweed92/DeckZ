@@ -66,7 +66,8 @@ fun DeckZRoot(c: AppContainer) {
         }
         composable("leader/{uid}", listOf(navArgument("uid") { type = NavType.IntType })) { e ->
             LeaderScreen(c, e.arguments!!.getInt("uid"), onBack = { nav.popBackStack() },
-                onCard = { nav.navigate("card/$it") }, onDeck = { nav.navigate("deck/$it") }, onMatchups = { nav.navigate("matchups/$it") })
+                onCard = { nav.navigate("card/$it") }, onDeck = { nav.navigate("deck/$it") }, onMatchups = { nav.navigate("matchups/$it") },
+                onCompare = { nav.navigate("compare/$it") })
         }
         composable("deck/{id}", listOf(navArgument("id") { type = NavType.StringType })) { e ->
             DeckScreen(c, e.arguments!!.getString("id")!!, onBack = { nav.popBackStack() }, onCard = { nav.navigate("card/$it") },
@@ -92,7 +93,11 @@ fun DeckZRoot(c: AppContainer) {
         }
         composable("mydecks") { MyDecksScreen(c, onBack = { nav.popBackStack() }, onOpen = { nav.navigate("mydeck/$it") }) }
         composable("mydeck/{id}", listOf(navArgument("id") { type = NavType.StringType })) { e ->
-            MyDeckEditorScreen(c, e.arguments!!.getString("id")!!, onBack = { nav.popBackStack() }, onCard = { nav.navigate("card/$it") })
+            MyDeckEditorScreen(c, e.arguments!!.getString("id")!!, onBack = { nav.popBackStack() }, onCard = { nav.navigate("card/$it") },
+                onCompare = { nav.navigate("compare/$it") })
+        }
+        composable("compare/{id}", listOf(navArgument("id") { type = NavType.StringType })) { e ->
+            MetaCompareScreen(c, e.arguments!!.getString("id")!!, onBack = { nav.popBackStack() }, onCard = { nav.navigate("card/$it") })
         }
     }
     }

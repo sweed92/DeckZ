@@ -50,6 +50,15 @@ class StrategyRepo(context: Context, db: AppDb) {
         Side(card, book.profile(card.number), stats, cards, "Mon deck : ${deck.name}")
     }
 
+    /** Compare un deck perso à la liste méta moyenne de son leader (null si le leader est inconnu). */
+    suspend fun compareToMeta(deck: fr.deckz.data.MyDeck): MetaComparison? = withContext(Dispatchers.Default) {
+        val uid = dao.uidByNumber(deck.leader) ?: return@withContext null
+        val stats = dao.leadersNow().firstOrNull { it.card.uid == uid }?.stats
+        val meta = weighted(dao.allUsageNow().filter { it.usage.leaderUid == uid })
+        val mine = dao.cardsByNumbers(deck.cards.keys.toList()).groupBy { it.number }.mapValues { it.value.first() }
+        MetaCompare.of(deck, meta, mine, stats?.decks)
+    }
+
     suspend fun cardsByNumbers(numbers: List<String>): Map<String, Card> = withContext(Dispatchers.Default) {
         if (numbers.isEmpty()) emptyMap() else dao.cardsByNumbers(numbers).groupBy { it.number }.mapValues { it.value.first() }
     }
