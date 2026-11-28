@@ -81,6 +81,12 @@ fun NotebookScreen(c: AppContainer, onBack: () -> Unit, onMatchup: (Int, Int) ->
             .any { it.contains(query.trim(), ignoreCase = true) }
     }
     val total = Record.of(games)
+    // Affrontements à travailler / points forts : à partir de MIN_GAMES parties jouées.
+    val ranked = entries.filter { it.record.total >= MIN_GAMES }
+    val worst = ranked.filter { it.record.pct < 50 }
+        .sortedWith(compareBy<NotebookEntry> { it.record.pct }.thenByDescending { it.record.total }).take(3)
+    val best = ranked.filter { it.record.pct >= 50 && it !in worst }
+        .sortedWith(compareByDescending<NotebookEntry> { it.record.pct }.thenByDescending { it.record.total }).take(3)
 
     Scaffold(
         containerColor = Night,
@@ -98,6 +104,24 @@ fun NotebookScreen(c: AppContainer, onBack: () -> Unit, onMatchup: (Int, Int) ->
                     Text("Bilan global", style = MaterialTheme.typography.labelMedium, color = Muted)
                     Text(total.label, style = MaterialTheme.typography.titleLarge, color = if (total.pct >= 50) WinGreen else LossRed)
                     Text("${total.total} partie(s) enregistrée(s)", style = MaterialTheme.typography.labelSmall, color = Muted)
+                }
+                Spacer(Modifier.padding(4.dp))
+            }
+            if (query.isBlank() && entries.any { it.record.total > 0 }) item {
+                Column(Modifier.fillMaxWidth().clip(RoundedCornerShape(14.dp)).background(Panel).padding(14.dp)) {
+                    if (ranked.isEmpty()) {
+                        Text("Affrontements à travailler", style = MaterialTheme.typography.titleSmall)
+                        Text(
+                            "Joue au moins $MIN_GAMES parties contre un même leader : tes affrontements les plus durs et tes points forts apparaîtront ici.",
+                            style = MaterialTheme.typography.bodySmall, color = Muted, modifier = Modifier.padding(top = 4.dp),
+                        )
+                    } else {
+                        RankBlock("À travailler", LossRed, worst, byNumber, onMatchup,
+                            empty = "Aucun affrontement perdant pour l'instant, bravo !")
+                        Spacer(Modifier.padding(5.dp))
+                        RankBlock("Tes points forts", WinGreen, best, byNumber, onMatchup,
+                            empty = "Pas encore d'affrontement gagnant avec $MIN_GAMES parties ou plus.")
+                    }
                 }
                 Spacer(Modifier.padding(4.dp))
             }
@@ -127,6 +151,35 @@ fun NotebookScreen(c: AppContainer, onBack: () -> Unit, onMatchup: (Int, Int) ->
                     if (me != null && opp != null) onMatchup(me.uid, opp.uid)
                 }
             }
+        }
+    }
+}
+
+private const val MIN_GAMES = 3
+
+@Composable
+private fun RankBlock(
+    title: String, color: androidx.compose.ui.graphics.Color, list: List<NotebookEntry>, byNumber: Map<String, Card>,
+    onMatchup: (Int, Int) -> Unit, empty: String,
+) {
+    Text(title, style = MaterialTheme.typography.titleSmall, color = color, fontWeight = FontWeight.SemiBold)
+    if (list.isEmpty()) Text(empty, style = MaterialTheme.typography.bodySmall, color = Muted, modifier = Modifier.padding(top = 2.dp))
+    list.forEach { e ->
+        val me = byNumber[e.me]
+        val opp = byNumber[e.opp]
+        Row(
+            Modifier.fillMaxWidth().clip(RoundedCornerShape(8.dp))
+                .clickable(enabled = me != null && opp != null) { if (me != null && opp != null) onMatchup(me.uid, opp.uid) }
+                .padding(vertical = 6.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            CardImage(opp?.art(), Modifier.width(30.dp).aspectRatio(63f / 88f), corner = 4.dp)
+            Spacer(Modifier.width(10.dp))
+            Column(Modifier.weight(1f)) {
+                Text("contre ${opp?.name ?: e.opp}", style = MaterialTheme.typography.bodyMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                Text("avec ${me?.name ?: e.me}", style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            }
+            Text(e.record.label, style = MaterialTheme.typography.labelMedium, color = color, fontWeight = FontWeight.SemiBold)
         }
     }
 }
